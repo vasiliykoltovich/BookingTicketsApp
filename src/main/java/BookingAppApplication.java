@@ -5,14 +5,13 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class,HibernateJpaAutoConfiguration.class},scanBasePackages = {"beans"})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class}, scanBasePackages = {"beans"})
 @ComponentScan(basePackages = "beans")
 public class BookingAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BookingAppApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(BookingAppApplication.class, args);
+    }
 
 
 }

@@ -31,10 +31,9 @@ public abstract class GenericController {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView errorHandle(Exception ex) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("exception", ex);
-        model.setViewName("pages/exceptionPage");
-        return model;
+        ModelAndView view = new ModelAndView("exceptions");
+        view.addObject("exception", ex);
+        return view;
     }
 
 }

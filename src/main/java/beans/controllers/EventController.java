@@ -2,6 +2,7 @@ package beans.controllers;
 
 import beans.models.Auditorium;
 import beans.models.Event;
+import beans.models.Rate;
 import beans.services.AuditoriumService;
 import beans.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,8 +39,8 @@ public class EventController {
     @GetMapping("/getEventByName/{name}")
     public ModelAndView getEventByName(@PathVariable("name") String name) {
         List<Event> events = service.getByName(name);
-        ModelAndView view = new ModelAndView("users");
-        view.addObject("users", events);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", events);
         return view;
 
     }
@@ -49,8 +51,8 @@ public class EventController {
                                  @RequestParam("auditorium") String auditoriumName) {
 
         Event event = service.getEvent(name,auditoriumService.getByName(auditoriumName) , date);
-        ModelAndView view = new ModelAndView("users");
-        view.addObject("users", event);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", event);
 //        return view;
         return new ResponseEntity<Event>(event, HttpStatus.OK);
 
@@ -62,7 +64,7 @@ public class EventController {
                                  @RequestBody Auditorium auditorium) {
 
         Event event = service.getEvent(name,auditoriumService.getByName(auditorium.getName()), date);
-        ModelAndView view = new ModelAndView("users");
+        ModelAndView view = new ModelAndView("events");
         view.addObject("events", event);
 //        return view;
         return new ResponseEntity<Event>(event, HttpStatus.OK);
@@ -77,14 +79,30 @@ public class EventController {
         view.addObject("events", events);
         return view;
     }
+//
+//    @PostMapping(path = "/createEvent", consumes = "application/json", produces = "application/json")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<Event> createEvent(@RequestBody Event eventTemplate) {
+//        Event event = service.create(eventTemplate);
+//                ModelAndView view = new ModelAndView("events");
+//                view.addObject("event", event);
+//        return new ResponseEntity<Event>(event, HttpStatus.OK);
+//    }
 
-    @PostMapping(path = "/createEvent", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/createEvent")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Event> createEvent(@RequestBody Event eventTemplate) {
-        Event event = service.create(eventTemplate);
-        //        ModelAndView view = new ModelAndView("users");
-        //        view.addObject("users", users);
-        return new ResponseEntity<Event>(event, HttpStatus.OK);
+    public ModelAndView createEvent(@RequestParam("name") String name,
+                                    @RequestParam("rate") Rate rate,
+                                    @RequestParam("basePrice") double basePrice,
+                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+                                    @RequestParam("auditorium") String auditoriumName) {
+        Auditorium auditorium = auditoriumService.getByName(auditoriumName);
+        Event event = service.create(new Event(name,rate,basePrice,date,auditorium));
+        List<Event> events = new ArrayList<>();
+        events.add(event);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", events);
+        return view;
     }
 
     @DeleteMapping("/deleteEvent")
