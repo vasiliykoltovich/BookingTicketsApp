@@ -1,5 +1,6 @@
 package beans.services;
 
+import beans.models.Auditorium;
 import beans.models.Ticket;
 import beans.models.User;
 
@@ -18,5 +19,10 @@ public interface BookingService {
 
     Ticket bookTicket(User user, Ticket ticket);
 
-    List<Ticket> getTicketsForEvent(String event, String auditorium, LocalDateTime date);
+    List<Ticket> getTicketsForEvent(String event, String auditoriumName, LocalDateTime date);
+
+    List<Ticket> getTicketsByEvent(String event, String auditoriumName, LocalDateTime date);
+
+    List<Ticket> getTicketsByUser(String email);
+
 }

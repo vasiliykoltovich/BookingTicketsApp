@@ -1,20 +1,16 @@
-package beans.controllers;
+package controllers;
 
 import beans.models.Event;
 import beans.models.Ticket;
 import beans.models.User;
-import beans.services.AuditoriumService;
-import beans.services.BookingService;
-import beans.services.EventService;
-import beans.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,6 +41,7 @@ public class BookingController extends GenericController {
 
     }
 
+    //pdf
     @PostMapping("/bookTicket")
     public ResponseEntity<Ticket> bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
                                              @RequestParam("auditorium") String auditorium,
@@ -74,5 +71,16 @@ public class BookingController extends GenericController {
         return new ResponseEntity<>(tickets, HttpStatus.OK);
 
     }
+
+
+    //pdf
+    @GetMapping(value = "/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ModelAndView getBookedTicketsByUser(@RequestParam("email") String email) {
+        List<Ticket> bookedTickets = bookingService.getTicketsByUser(email);
+        ModelAndView  view = new ModelAndView("tickets");
+        view.addObject("tickets", bookedTickets);
+        return view;
+    }
+
 
 }

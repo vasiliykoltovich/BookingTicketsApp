@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -153,8 +154,24 @@ public class BookingServiceImpl implements BookingService {
         return ticket;
     }
 
+
+
+    @Override
+    public List<Ticket> getTicketsByUser(String email) {
+        User foundUser=userService.getUserByEmail(email);
+        BookingDAO.validateUser(foundUser);
+        return bookingDAO.getTickets(foundUser);
+    }
+
     @Override
     public List<Ticket> getTicketsForEvent(String event, String auditoriumName, LocalDateTime date) {
+        final Auditorium auditorium = auditoriumService.getByName(auditoriumName);
+        final Event foundEvent = eventService.getEvent(event, auditorium, date);
+        return bookingDAO.getTickets(foundEvent);
+    }
+
+    @Override
+    public List<Ticket> getTicketsByEvent(String event, String auditoriumName, LocalDateTime date) {
         final Auditorium auditorium = auditoriumService.getByName(auditoriumName);
         final Event foundEvent = eventService.getEvent(event, auditorium, date);
         return bookingDAO.getTickets(foundEvent);

@@ -25,6 +25,7 @@ public interface UserDAO {
 
     List<User> getAll();
 
+
     static void validateUser(User user) {
         if (Objects.isNull(user)) {
             throw new NullPointerException("User is [null]");

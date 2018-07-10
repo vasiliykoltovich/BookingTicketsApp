@@ -1,4 +1,4 @@
-package beans.controllers;
+package controllers;
 
 import beans.models.Auditorium;
 import beans.services.AuditoriumService;
@@ -17,20 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 @Controller
-public class AuditoriumController {
-    @Autowired
-    private Environment environment;
-
-    @Autowired
-    private EventService eventService;
-
-    @Autowired
-    private BookingService bookingService;
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private AuditoriumService auditoriumService;
+public class AuditoriumController extends  GenericController{
 
     @GetMapping("/getAuditoriums")
     @ResponseStatus(HttpStatus.OK)

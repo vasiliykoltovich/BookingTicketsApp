@@ -1,4 +1,4 @@
-package beans.controllers;
+package controllers;
 
 import beans.models.Event;
 import beans.models.User;

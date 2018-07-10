@@ -1,4 +1,4 @@
-package beans.controllers;
+package controllers;
 
 import beans.models.Auditorium;
 import beans.models.Event;
@@ -15,30 +15,22 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class EventController {
-    @Autowired
-    private Environment environment;
-
-    @Autowired
-    private EventService service;
-    @Autowired
-    private AuditoriumService auditoriumService;
+public class EventController extends GenericController {
 
     @GetMapping("/getEventByName/{name}")
     public ModelAndView getEventByName(@PathVariable("name") String name) {
-        List<Event> events = service.getByName(name);
+        List<Event> events = eventService.getByName(name);
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", events);
         return view;
@@ -50,7 +42,7 @@ public class EventController {
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestParam("auditorium") String auditoriumName) {
 
-        Event event = service.getEvent(name,auditoriumService.getByName(auditoriumName) , date);
+        Event event = eventService.getEvent(name,auditoriumService.getByName(auditoriumName) , date);
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", event);
 //        return view;
@@ -63,7 +55,7 @@ public class EventController {
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestBody Auditorium auditorium) {
 
-        Event event = service.getEvent(name,auditoriumService.getByName(auditorium.getName()), date);
+        Event event = eventService.getEvent(name,auditoriumService.getByName(auditorium.getName()), date);
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", event);
 //        return view;
@@ -74,7 +66,7 @@ public class EventController {
 
     @GetMapping("/getAllEvents")
     public ModelAndView getAllEvents() {
-        List<Event> events = service.getAll();
+        List<Event> events = eventService.getAll();
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", events);
         return view;
@@ -97,7 +89,7 @@ public class EventController {
                                     @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                     @RequestParam("auditorium") String auditoriumName) {
         Auditorium auditorium = auditoriumService.getByName(auditoriumName);
-        Event event = service.create(new Event(name,rate,basePrice,date,auditorium));
+        Event event = eventService.create(new Event(name,rate,basePrice,date,auditorium));
         List<Event> events = new ArrayList<>();
         events.add(event);
         ModelAndView view = new ModelAndView("events");
@@ -108,7 +100,48 @@ public class EventController {
     @DeleteMapping("/deleteEvent")
     @ResponseStatus(HttpStatus.OK)
     public void deleteEvent(@RequestBody Event eventTemplate) {
-        service.remove(eventTemplate);
+        eventService.remove(eventTemplate);
+    }
+
+    @GetMapping(path = "/getForDateRange")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ModelAndView getForDateRange(
+                                    @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+                                    @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+        List<Event> events = eventService.getForDateRange(from,to);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", events);
+        return view;
+    }
+
+    @GetMapping(path = "/getNextEvents")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ModelAndView getNextEvents(
+            @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+        List<Event> events = eventService.getNextEvents(to);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", events);
+        return view;
+    }
+
+    @PutMapping(path = "/assignAuditorium")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ModelAndView assignAuditorium(@RequestParam("event") String eventName, @RequestParam("auditorium") String auditoriumName,
+                                         @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+        Auditorium auditorium = auditoriumService.getByName(auditoriumName);
+        Event event = eventService.getEvent(eventName,auditorium,date);
+
+       if(eventService.getEvent(eventName,auditorium,date)!=null){
+           event=eventService.assignAuditorium(event,auditorium,date);
+       } else{
+           event=eventService.create(new Event(eventName,Rate.HIGH,68,date,auditorium));
+       }
+
+        List<Event> events = new ArrayList<>();
+        events.add(event);
+        ModelAndView view = new ModelAndView("events");
+        view.addObject("events", events);
+        return view;
     }
 
 }
