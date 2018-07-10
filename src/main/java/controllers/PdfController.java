@@ -56,7 +56,7 @@ public class PdfController extends GenericController {
 
         Event event = eventService.getEvent(eventName, auditoriumService.getByName(auditorium), date);
         double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
-        Ticket booked = bookingService.bookTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
+        Ticket booked = bookingService.bookAndReturnTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(booked);
         Map<String, Object> model = new HashMap<>();

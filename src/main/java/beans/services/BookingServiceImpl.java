@@ -154,6 +154,28 @@ public class BookingServiceImpl implements BookingService {
         return ticket;
     }
 
+    @Override
+    public Ticket bookAndReturnTicket(User user, Ticket ticket) {
+        Ticket newticket=null;
+        if (Objects.isNull(user)) {
+            throw new NullPointerException("User is [null]");
+        }
+        User foundUser = userService.getById(user.getId());
+        if (Objects.isNull(foundUser)) {
+            throw new IllegalStateException("User: [" + user + "] is not registered");
+        }
+
+        List<Ticket> bookedTickets = bookingDAO.getTickets(ticket.getEvent());
+        boolean seatsAreAlreadyBooked = bookedTickets.stream().filter(bookedTicket -> ticket.getSeatsList().stream().filter(
+                bookedTicket.getSeatsList() :: contains).findAny().isPresent()).findAny().isPresent();
+
+        if (!seatsAreAlreadyBooked)
+            newticket=bookingDAO.create(user, ticket);
+        else
+            throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
+
+        return newticket;
+    }
 
 
     @Override
