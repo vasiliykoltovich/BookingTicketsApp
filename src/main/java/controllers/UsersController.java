@@ -40,7 +40,9 @@ public class UsersController extends GenericController {
 
     @GetMapping("/getUserById/{id}")
     public ModelAndView getUserById(@PathVariable("id") String id) {
-        User users = userService.getById(Long.valueOf(id));
+        User user = userService.getById(Long.valueOf(id));
+        List<User> users=new ArrayList<>();
+        users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
         return view;
@@ -50,6 +52,8 @@ public class UsersController extends GenericController {
     @GetMapping("/getUserByEmail/{email}")
     public ModelAndView getUserByEmail(@PathVariable("email") String email) {
         User user = userService.getUserByEmail(email);
+        List<User> users=new ArrayList<>();
+        users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", user);
         return view;
@@ -58,7 +62,9 @@ public class UsersController extends GenericController {
     @PostMapping(path = "/createUser", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView createUser(@RequestBody User userRequest) {
-        User users = userService.register(new User(userRequest.getEmail(), userRequest.getName(), userRequest.getBirthday()));
+        User user = userService.register(new User(userRequest.getEmail(), userRequest.getName(), userRequest.getBirthday()));
+        List<User> users=new ArrayList<>();
+        users.add(user);
                 ModelAndView view = new ModelAndView("users");
                 view.addObject("users", users);
         return view;
@@ -69,6 +75,8 @@ public class UsersController extends GenericController {
     public ModelAndView createUser(@RequestParam String email, @RequestParam String name,
                                            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         User user = userService.register(new User(email, name, date));
+        List<User> users=new ArrayList<>();
+        users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", user);
         return view;
