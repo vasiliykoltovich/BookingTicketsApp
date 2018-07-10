@@ -24,6 +24,7 @@ public class PdfController extends GenericController {
         List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditorium, date);
         Map<String, Object> model = new HashMap<>();
         model.put("tickets", tickets);
+
         return new ModelAndView(new PdfView(), model);
 
     }
@@ -33,7 +34,8 @@ public class PdfController extends GenericController {
         List<Ticket> bookedTickets = bookingService.getTicketsByUser(email);
         Map<String, Object> model = new HashMap<>();
         model.put("tickets", bookedTickets);
-        return new ModelAndView(new PdfView(), model);
+//        return new ModelAndView(new PdfView(), model);
+        throw  new RuntimeException("Expected message");
 
     }
 

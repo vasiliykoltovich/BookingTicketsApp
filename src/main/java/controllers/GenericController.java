@@ -6,7 +6,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-//@ControllerAdvice
 public abstract class GenericController {
 
     @Autowired
@@ -30,7 +29,7 @@ public abstract class GenericController {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView errorHandle(Exception ex) {
-        ModelAndView view = new ModelAndView("exceptions");
+        ModelAndView view = new ModelAndView("errors");
         view.addObject("exception", ex);
         return view;
     }
