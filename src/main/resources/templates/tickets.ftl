@@ -6,21 +6,26 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<h2 class="users-list">Booked Tickets:</h2>
+<h2 class="events-list">Tickets:</h2>
+
 
 <table>
     <tr>
-        <th>Id</th>
-        <th>Identification Number</th>
-        <th>Arrival</th>
-        <th>Departure</th>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Seats</th>
+        <th>Price</th>
+        <th>Email</th>
+        <th>Auditorium</th>
     </tr>
     <#list tickets as t>
     <tr>
-        <td>${t.id}</td>
-        <td>${t.identification}</td>
-        <td>${t.arrival}</td>
-        <td>${t.departure}</td>
+        <td>${t.event.name}</td>
+        <td>${t.dateTime}</td>
+        <td>${t.seats}</td>
+        <td>${t.price}</td>
+        <td>${t.user.email}</td>
+        <td>${t.event.auditorium.name}</td>
     </tr>
 </#list>
 </table>
