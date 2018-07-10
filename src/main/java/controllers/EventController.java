@@ -59,7 +59,7 @@ public class EventController extends GenericController {
     }
 
     @GetMapping("/getEvent")
-    public ResponseEntity<Event> getEvent(@RequestParam("name") String name,
+    public ModelAndView getEvent(@RequestParam("name") String name,
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestParam("auditorium") String auditoriumName) {
 
@@ -68,8 +68,8 @@ public class EventController extends GenericController {
         events.add(event);
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", events);
-//        return view;
-        return new ResponseEntity<Event>(event, HttpStatus.OK);
+        return view;
+//        return new ResponseEntity<Event>(event, HttpStatus.OK);
 
     }
 

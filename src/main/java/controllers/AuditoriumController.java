@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,39 +23,46 @@ public class AuditoriumController extends  GenericController{
 
     @GetMapping("/getAuditoriums")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Auditorium>> getAuditoriums(){
+    public ModelAndView getAuditoriums(){
 
         List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
-        return new ResponseEntity<>(auditoriums,HttpStatus.OK);
+        ModelAndView view = new ModelAndView("auditoriums");
+        view.addObject("auditoriums", auditoriums);
+        return view;
+//        return new ResponseEntity<>(auditoriums,HttpStatus.OK);
 
     }
 
     @GetMapping("/getAuditoriumByName/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Auditorium> getAuditoriumByName(@PathVariable("name") String name){
+    public ModelAndView getAuditoriumByName(@PathVariable("name") String name) {
 
         Auditorium auditorium = auditoriumService.getByName(name);
-        return new ResponseEntity<>(auditorium,HttpStatus.OK);
+        ModelAndView view = new ModelAndView("auditoriums");
+        List<Auditorium> auditoriums = new ArrayList<>();
+        auditoriums.add(auditorium);
+        view.addObject("auditoriums", auditoriums);
+        return view;
+        //        return new ResponseEntity<>(auditorium,HttpStatus.OK);
 
     }
 
     @GetMapping("/getSeatsNumber/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Integer> getSeatsNumber(@PathVariable("name") String name){
+    public ResponseEntity<Integer> getSeatsNumber(@PathVariable("name") String name) {
 
-        Integer  seatsNumber = auditoriumService.getSeatsNumber(name);
-        return new ResponseEntity<>(seatsNumber,HttpStatus.OK);
+        Integer seatsNumber = auditoriumService.getSeatsNumber(name);
+        return new ResponseEntity<>(seatsNumber, HttpStatus.OK);
 
     }
 
     @GetMapping("/getVipSeats/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Integer>> getVipSeats(@PathVariable("name") String name){
+    public ResponseEntity<List<Integer>> getVipSeats(@PathVariable("name") String name) {
 
-        List<Integer>  vipSeats = auditoriumService.getVipSeats(name);
-        return new ResponseEntity<>(vipSeats,HttpStatus.OK);
+        List<Integer> vipSeats = auditoriumService.getVipSeats(name);
+        return new ResponseEntity<>(vipSeats, HttpStatus.OK);
 
     }
-
 
 }

@@ -26,10 +26,6 @@ public class DiscountController extends GenericController {
         Event event = eventService.getEvent(eventName,auditoriumService.getByName(auditorium),date);
         User user = userService.getUserByEmail(email);
         double price = discountService.getDiscount(user,event);
-        //        ModelAndView view = new ModelAndView("users");
-        //        view.addObject("users", events);
-
-        //        return view;
         return new ResponseEntity<>(price, HttpStatus.OK);
 
     }
