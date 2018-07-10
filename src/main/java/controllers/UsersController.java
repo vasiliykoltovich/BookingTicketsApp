@@ -57,21 +57,21 @@ public class UsersController extends GenericController {
 
     @PostMapping(path = "/createUser", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> createUser(@RequestBody User userRequest) {
+    public ModelAndView createUser(@RequestBody User userRequest) {
         User users = userService.register(new User(userRequest.getEmail(), userRequest.getName(), userRequest.getBirthday()));
-        //        ModelAndView view = new ModelAndView("users");
-        //        view.addObject("users", users);
-        return new ResponseEntity<>(users, HttpStatus.OK);
+                ModelAndView view = new ModelAndView("users");
+                view.addObject("users", users);
+        return view;
     }
 
     @PostMapping(path = "/createUser")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> createUser(@RequestParam String email, @RequestParam String name,
+    public ModelAndView createUser(@RequestParam String email, @RequestParam String name,
                                            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         User user = userService.register(new User(email, name, date));
-        //        ModelAndView view = new ModelAndView("users");
-        //        view.addObject("users", users);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        ModelAndView view = new ModelAndView("users");
+        view.addObject("users", user);
+        return view;
     }
 
     @DeleteMapping("/deleteUser")

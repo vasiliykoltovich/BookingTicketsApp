@@ -16,12 +16,12 @@
         <th>Email</th>
         <th>Birthday</th>
     </tr>
-    <#list users as user>
+    <#list users as us>
     <tr>
-        <td>${user.id}</td>
-        <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>${user.birthday}</td>
+        <td>${us.id}</td>
+        <td>${us.name}</td>
+        <td>${us.email}</td>
+        <td>${us.birthday}</td>
     </tr>
    </#list>
 </table>
