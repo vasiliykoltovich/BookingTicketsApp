@@ -64,8 +64,10 @@ public class EventController extends GenericController {
                                  @RequestParam("auditorium") String auditoriumName) {
 
         Event event = eventService.getEvent(name,auditoriumService.getByName(auditoriumName) , date);
+        List<Event> events = new ArrayList<>();
+        events.add(event);
         ModelAndView view = new ModelAndView("events");
-        view.addObject("events", event);
+        view.addObject("events", events);
 //        return view;
         return new ResponseEntity<Event>(event, HttpStatus.OK);
 
@@ -77,8 +79,10 @@ public class EventController extends GenericController {
                                  @RequestBody Auditorium auditorium) {
 
         Event event = eventService.getEvent(name,auditoriumService.getByName(auditorium.getName()), date);
+        List<Event> events = new ArrayList<>();
+        events.add(event);
         ModelAndView view = new ModelAndView("events");
-        view.addObject("events", event);
+        view.addObject("events", events);
 //        return view;
         return new ResponseEntity<Event>(event, HttpStatus.OK);
 
