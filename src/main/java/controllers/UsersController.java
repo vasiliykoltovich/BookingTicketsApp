@@ -89,6 +89,15 @@ public class UsersController extends GenericController {
     }
 
 
+    @DeleteMapping("/deleteUserByEmail")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@RequestParam("email") String email) {
+        User user=userService.getUserByEmail(email);
+        userService.remove(user);
+    }
+
+
+
 
     @PostMapping("/loadUsers")
     public ModelAndView loadUser(@RequestParam MultipartFile file,

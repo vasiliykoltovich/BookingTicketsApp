@@ -128,6 +128,7 @@ public class EventController extends GenericController {
         eventService.remove(eventTemplate);
     }
 
+
     @GetMapping(path = "/getForDateRange")
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView getForDateRange(

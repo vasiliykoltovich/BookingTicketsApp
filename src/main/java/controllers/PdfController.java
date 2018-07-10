@@ -17,7 +17,7 @@ import java.util.Map;
 @Controller
 public class PdfController extends GenericController {
 
-    @GetMapping("/pdf/getTicketForEvent")
+    @GetMapping(value = "/pdf/getTicketForEvent",produces = MediaType.APPLICATION_PDF_VALUE)
     public ModelAndView getTicketForEvent(@RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
@@ -34,8 +34,7 @@ public class PdfController extends GenericController {
         List<Ticket> bookedTickets = bookingService.getTicketsByUser(email);
         Map<String, Object> model = new HashMap<>();
         model.put("tickets", bookedTickets);
-//        return new ModelAndView(new PdfView(), model);
-        throw  new RuntimeException("Expected message");
+        return new ModelAndView(new PdfView(), model);
 
     }
 
