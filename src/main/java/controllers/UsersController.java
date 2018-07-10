@@ -1,7 +1,5 @@
 package controllers;
 
-import beans.models.Auditorium;
-import beans.models.Event;
 import beans.models.User;
 import beans.services.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ import java.util.List;
 public class UsersController extends GenericController {
 
     @Autowired
-    private UploadService<Event> uploadService;
+    private UploadService uploadService;
 
     @GetMapping("/getUserByName/{name}")
     public ModelAndView getUserByName(@PathVariable("name") String name) {

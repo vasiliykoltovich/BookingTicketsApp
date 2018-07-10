@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UploadService<ResponseType> {
+public class UploadService {
 
     public List<Event> uploadEventFile(MultipartFile multipartFile) throws IOException {
 

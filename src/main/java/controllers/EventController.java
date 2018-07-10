@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 public class EventController extends GenericController {
 
     @Autowired
-    private UploadService<Event> uploadService;
+    private UploadService uploadService;
 
     @Value("${upload.events.path}")
     private String path;
