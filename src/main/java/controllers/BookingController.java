@@ -38,27 +38,27 @@ public class BookingController extends GenericController {
 
     }
 
-    //pdf
-//    @PostMapping("/bookTicket")
-//    public ModelAndView bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
-//                                             @RequestParam("auditorium") String auditorium,
-//                                             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
-//                                             @RequestParam("seats") String seats) {
-//
-//        User user = userService.getUserByEmail(email);
-//        List<Integer> seatList = Arrays.asList(seats.split(",")).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
-//
-//        Event event = eventService.getEvent(eventName, auditoriumService.getByName(auditorium), date);
-//        double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
-//        Ticket booked = bookingService.bookTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
-//        List<Ticket> tickets = new ArrayList<>();
-//        tickets.add(booked);
-//        ModelAndView view = new ModelAndView("tickets");
-//        view.addObject("tickets", tickets);
-//        return view;
-////        return new ResponseEntity<>(booked, HttpStatus.CREATED);
-//
-//    }
+
+    @PostMapping("/bookTicket")
+    public ModelAndView bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
+                                             @RequestParam("auditorium") String auditorium,
+                                             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+                                             @RequestParam("seats") String seats) {
+
+        User user = userService.getUserByEmail(email);
+        List<Integer> seatList = Arrays.asList(seats.split(",")).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+
+        Event event = eventService.getEvent(eventName, auditoriumService.getByName(auditorium), date);
+        double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
+        Ticket booked = bookingService.bookAndReturnTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(booked);
+        ModelAndView view = new ModelAndView("tickets");
+        view.addObject("tickets", tickets);
+        return view;
+//        return new ResponseEntity<>(booked, HttpStatus.CREATED);
+
+    }
 
     @GetMapping("/getTicketForEvent")
     public ModelAndView getTicketForEvent(@RequestParam("event") String eventName,
