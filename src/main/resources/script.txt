@@ -4,65 +4,66 @@ http://localhost:8100/getUserById/1
 http://localhost:8100/getUserById/2
 http://localhost:8100/getUserById/3
 
-http://localhost:8100/getUserByName/Vasil Koltovich
-http://localhost:8100/getUserByName/Andrei Ptushko
+http://localhost:8100/getUserByName/Vasil%20Koltovich
+http://localhost:8100/getUserByName/Andrei%20Ptushko
 
 http://localhost:8100/getUserByEmail/vasil.koltovich@gmail.com
 http://localhost:8100/getUserByEmail/Andrei_Andreeev@gmail.com
 http://localhost:8100/getUserByEmail/john@gmail.com
+http://localhost:8100/getUserByEmail/john@gmail.com
 
 POST
 http://localhost:8100/createUser?email=test@gmail.com&name=Harris&date=1984-09-09
-http://localhost:8100/createUser?email=john@gmail.com&name=john booker&date=1985-05-05
+http://localhost:8100/createUser?email=john@gmail.com&name=john%20booker&date=1985-05-05
 
 DELETE
 http://localhost:8100/deleteUserByEmail/john@gmail.com
-http://localhost:8100/getUserByEmail/john@gmail.com
+
 
 ##Event Operations
 
-http://localhost:8100/getEventByName/The revenant
+http://localhost:8100/getEventByName/The%20revenant
 http://localhost:8100/getEventByName/Meeting
 http://localhost:8100/getEventByName/Terminator
 
-http://localhost:8100/getEvent?name=Terminator&date=2018-04-09T18:30&auditorium=Red hall
+http://localhost:8100/getEvent?name=Meeting%20of%20Strangers&date=2018-03-08T00:00&auditorium=Red%20hall
 http://localhost:8100/getAllEvents
 POST
-http://localhost:8100/createEvent?name=Meeting of Strangers&rate=HIGH&basePrice=45&date=2018-03-08T00:00&auditorium=Red hall
+http://localhost:8100/createEvent?name=Meeting%20of%20Strangers&rate=HIGH&basePrice=45&date=2018-03-08T00:00&auditorium=Red%20hall
+http://localhost:8100/createEvent?name=IDResearch&rate=HIGH&basePrice=890&date=2018-09-08T00:00&auditorium=Blue%20hall
 
 http://localhost:8100/getForDateRange?from=2018-04-09T18:30&to=2018-02-04T00:00
 http://localhost:8100/getNextEvents?to=2018-02-04T00:00
 
 ##Auditorium operations
 PUT
-http://localhost:8100/assignAuditorium?event=Aliens&auditorium=Blue hall&date=2018-12-03T00:00
+http://localhost:8100/assignAuditorium?event=IDResearch&auditorium=Blue%20hall&date=2018-09-08T00:00
 http://localhost:8100/getAuditoriums
-http://localhost:8100/getAuditoriumByName/Blue hall
-http://localhost:8100/getSeatsNumber/Red hall
-http://localhost:8100/getVipSeats/Red hall
+http://localhost:8100/getAuditoriumByName/Blue%20hall
+http://localhost:8100/getSeatsNumber/Red%20hall
+http://localhost:8100/getVipSeats/Red%20hall
 
 ##Discount
-http://localhost:8100/getDiscount?email=vasil.koltovich@gmail.com&event=Meeting&auditorium=Red hall&date=2018-02-04T00:00
+http://localhost:8100/getDiscount?email=vasil.koltovich@gmail.com&event=Meeting&auditorium=Red%20hall&date=2018-02-04T00:00
 
 
 ## Booking operations
-http://localhost:8100/getTicketPrice?eventName=Meeting&auditorium=Red hall&date=2018-02-04T00:00&email=vasil.koltovich@gmail.com&seats=2,4,4
+http://localhost:8100/getTicketPrice?eventName=Meeting&auditorium=Red%20hall&date=2018-02-04T00:00&email=vasil.koltovich@gmail.com&seats=22,24,34
 POST
-http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=The revenant&auditorium=Blue hall&date=2018-01-04&seats=21,22
+http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=The%20revenant&auditorium=Blue%20hall&date=2018-01-04T00:00&seats=21,22
 
-http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=Aliens&auditorium=Blue hall&date=2018-12-03T00:00&seats=1,2
+http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=IDResearch&auditorium=Blue%20hall&date=2018-09-08T00:00&seats=32,33
 
-http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=Meeting of Strangers&auditorium=Red hall&date=2018-03-08T00:00&seats=1,2
+http://localhost:8100/bookTicket?email=vasil.koltovich@gmail.com&event=Meeting%20of%20Strangers&auditorium=Red%20hall&date=2018-03-08T00:00&seats=47,48
 
-http://localhost:8100/getTicketForEvent?event=Aliens&auditorium=Blue hall&date=2018-12-03T00:00
-http://localhost:8100/getBookedTicketsByUser?email=vasil.koltovich@gmail.com
+http://localhost:8100/getTicketForEvent?event=IDResearch&auditorium=Blue%20hall&date=2018-09-08T00:00
 
 ##Pdf view
-http://localhost:8100/pdf/getTicketForEvent?event=Aliens&auditorium=Blue hall&date=2018-12-03T00:00
+http://localhost:8100/pdf/getTicketForEvent?event=IDResearch&auditorium=Blue%20hall&date=2018-09-08T00:00
 http://localhost:8100/pdf/getBookedTicketsByUser?email=vasil.koltovich@gmail.com
 POST
-http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=Meeting of Strangers&auditorium=Red hall&date=2018-03-08T00:00&seats=1,2
-http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=The revenant&auditorium=Blue hall&date=2018-01-04T00:00&seats=32
+http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=Meeting%20of%20Strangers&auditorium=Red%20hall&date=2018-03-08T00:00&seats=54
+http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=The%20revenant&auditorium=Blue%20hall&date=2018-01-04T00:00&seats=56
 
 
 

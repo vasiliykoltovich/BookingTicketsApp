@@ -26,7 +26,7 @@ public class AuditoriumController extends  GenericController{
     public ModelAndView getAuditoriums(){
 
         List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
-        ModelAndView view = new ModelAndView("auditoriums");
+        ModelAndView view = new ModelAndView("auditories");
         view.addObject("auditoriums", auditoriums);
         return view;
 //        return new ResponseEntity<>(auditoriums,HttpStatus.OK);
@@ -38,7 +38,7 @@ public class AuditoriumController extends  GenericController{
     public ModelAndView getAuditoriumByName(@PathVariable("name") String name) {
 
         Auditorium auditorium = auditoriumService.getByName(name);
-        ModelAndView view = new ModelAndView("auditoriums");
+        ModelAndView view = new ModelAndView("auditories");
         List<Auditorium> auditoriums = new ArrayList<>();
         auditoriums.add(auditorium);
         view.addObject("auditoriums", auditoriums);
