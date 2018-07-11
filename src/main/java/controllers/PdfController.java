@@ -3,8 +3,6 @@ package controllers;
 import beans.models.Event;
 import beans.models.Ticket;
 import beans.models.User;
-import beans.services.BookingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
