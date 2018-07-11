@@ -39,7 +39,7 @@ public class BookingController extends GenericController {
     }
 
 
-    @PostMapping("/bookTicket")
+    @PostMapping(value = "/bookTicket",params = {"email","event","auditorium","date","seats"})
     public ModelAndView bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
                                              @RequestParam("auditorium") String auditorium,
                                              @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
@@ -60,7 +60,7 @@ public class BookingController extends GenericController {
 
     }
 
-    @GetMapping("/getTicketForEvent")
+    @GetMapping(value = "/getTicketForEvent", params = {"event","auditorium", "date"})
     public ModelAndView getTicketForEvent(@RequestParam("event") String eventName,
                                                           @RequestParam("auditorium") String auditorium,
                                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {

@@ -25,19 +25,7 @@ import java.util.stream.Collectors;
 @Controller
 public class PdfController extends GenericController {
 
-    //    @GetMapping(value = "/pdf/getTicketForEvent",produces = MediaType.APPLICATION_PDF_VALUE)
-    //    public ModelAndView getTicketForEvent(@RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
-    //                                          @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
-    //
-    //        List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditorium, date);
-    //        Map<String, Object> model = new HashMap<>();
-    //        model.put("tickets", tickets);
-    //
-    //        return new ModelAndView(new PdfView(), model);
-    //
-    //    }
-
-    @GetMapping(value = "/pdf/getTicketForEvent", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/getTicketForEvent", produces = MediaType.APPLICATION_PDF_VALUE,params = {"event","auditorium","date"},headers = {"accept"})
     public ModelAndView getTicketForEvent(@Nullable @RequestHeader("accept") String accept, @RequestParam("event") String eventName,
                                           @RequestParam("auditorium") String auditorium,
                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -57,16 +45,7 @@ public class PdfController extends GenericController {
 
     }
 
-    //    @GetMapping(value = "/pdf/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE)
-    //    public ModelAndView getBookedTicketsByUser(@RequestParam("email") String email) {
-    //        List<Ticket> bookedTickets = bookingService.getTicketsByUser(email);
-    //        Map<String, Object> model = new HashMap<>();
-    //        model.put("tickets", bookedTickets);
-    //        return new ModelAndView(new PdfView(), model);
-    //
-    //    }
-
-    @GetMapping(value = "/pdf/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE,params = {"email"},headers = {"accept"})
     public ModelAndView getBookedTicketsByUser(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email) {
         List<Ticket> tickets = bookingService.getTicketsByUser(email);
         ModelAndView view = null;
@@ -82,29 +61,9 @@ public class PdfController extends GenericController {
         return view;
     }
 
-    //    @PostMapping("/pdf/bookTicket")
-    //    @ResponseStatus(HttpStatus.CREATED)
-    //    public ModelAndView bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
-    //                                   @RequestParam("auditorium") String auditorium,
-    //                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
-    //                                   @RequestParam("seats") String seats) {
-    //
-    //        User user = userService.getUserByEmail(email);
-    //        List<Integer> seatList = Arrays.asList(seats.split(",")).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
-    //
-    //        Event event = eventService.getEvent(eventName, auditoriumService.getByName(auditorium), date);
-    //        double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
-    //        Ticket booked = bookingService.bookAndReturnTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
-    //        List<Ticket> tickets = new ArrayList<>();
-    //        tickets.add(booked);
-    //        Map<String, Object> model = new HashMap<>();
-    //        model.put("tickets", tickets);
-    //        return new ModelAndView(new PdfView(), model);
-    ////        return new ResponseEntity<>(booked, HttpStatus.CREATED);
-    //
-    //    }
 
-    @PostMapping("/pdf/bookTicket")
+
+    @PostMapping(value = "/bookTicket",params = {"email","event","auditorium","date","seats"},headers = {"accept"},produces = MediaType.APPLICATION_PDF_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView bookTicket(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email,
                                    @RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
