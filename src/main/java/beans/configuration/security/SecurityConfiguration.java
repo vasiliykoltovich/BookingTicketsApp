@@ -29,26 +29,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.headers().frameOptions().disable();
-        http.csrf().disable()
-                .authorizeRequests()
-         .antMatchers("/getUserById/**").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getAuditoriums").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getAuditoriumByName/**").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getSeatsNumber/**").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getVipSeats/**").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getTicketPrice/**").hasAuthority("REGISTERED_USER")
-         .antMatchers("/getTicketForEvent/**").hasAuthority("REGISTERED_USER")
+        http.csrf().disable().authorizeRequests().antMatchers("/getUserById/**").hasAuthority("REGISTERED_USER").antMatchers("/getAuditoriums").hasAuthority(
+                "REGISTERED_USER").antMatchers("/getAuditoriumByName/**").hasAuthority("REGISTERED_USER").antMatchers("/getSeatsNumber/**").hasAuthority(
+                "REGISTERED_USER").antMatchers("/getVipSeats/**").hasAuthority("REGISTERED_USER").antMatchers("/getTicketPrice/**").hasAuthority(
+                "REGISTERED_USER").antMatchers("/getTicketForEvent/**").hasAuthority("REGISTERED_USER")
 
-
-         .antMatchers("/bookTicket**").access("hasAuthority('BOOKING_MANAGER')").and().formLogin()
-                                                         .loginPage("/login").failureUrl("/login?error")
-                                                         .usernameParameter("name")
-                                                         .passwordParameter("password")
-                                                         .and().logout().logoutSuccessUrl("/login?logout").deleteCookies("remember-me")
-                                                         .and().csrf()
-                                                         .and().exceptionHandling().accessDeniedPage("/403")
-                .and().rememberMe().tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(120);
+                .antMatchers("/bookTicket**").hasAuthority("BOOKING_MANAGER").
+                                                                                     anyRequest().authenticated().and().formLogin().loginPage("/login")
+                .permitAll().failureUrl("/login?error").usernameParameter("name").passwordParameter("password").and().logout().permitAll().logoutSuccessUrl(
+                "/login?logout").deleteCookies("remember-me").and().csrf().and().exceptionHandling().accessDeniedPage("/403").and().rememberMe()
+                .tokenRepository(persistentTokenRepository()).tokenValiditySeconds(120);
 
     }
 
