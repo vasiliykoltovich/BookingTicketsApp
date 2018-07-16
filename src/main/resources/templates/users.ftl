@@ -15,6 +15,8 @@
         <th>Name</th>
         <th>Email</th>
         <th>Birthday</th>
+        <th>Password</th>
+        <th>Roles</th>
     </tr>
     <#list users as us>
     <tr>
@@ -22,6 +24,8 @@
         <td>${us.name}</td>
         <td>${us.email}</td>
         <td>${us.birthday}</td>
+        <td>${us.password}</td>
+        <td>${us.roles}</td>
     </tr>
    </#list>
 </table>

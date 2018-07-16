@@ -30,13 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().disable();
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/getUserById/**").hasAuthority("BOOKING_MANAGER")
-                .antMatchers("/getAuditoriums").hasAuthority("REGISTERED_USER")
-                .antMatchers("/getAuditoriumByName/**").hasAuthority("REGISTERED_USER")
-                .antMatchers("/getSeatsNumber/**").hasAuthority("REGISTERED_USER")
-                .antMatchers("/getVipSeats/**").hasAuthority("REGISTERED_USER")
-                .antMatchers("/getTicketPrice/**").hasAuthority("REGISTERED_USER")
-                .antMatchers("/getTicketForEvent/**").hasAuthority("REGISTERED_USER")
+                .antMatchers("/getUserById/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getAuditoriums").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
+                .antMatchers("/getAuditoriumByName/**").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
+                .antMatchers("/getSeatsNumber/**").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
+                .antMatchers("/getVipSeats/**").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
+                .antMatchers("/getTicketPrice/**").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
+                .antMatchers("/getTicketForEvent/**").hasAnyAuthority("REGISTERED_USER","REGISTERED_USER")
                 .antMatchers("/bookTicket**").hasAuthority("BOOKING_MANAGER").
 
                  anyRequest().authenticated().and().formLogin().loginPage("/login")

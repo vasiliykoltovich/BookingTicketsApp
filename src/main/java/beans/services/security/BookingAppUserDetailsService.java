@@ -26,13 +26,13 @@ public class BookingAppUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-//        List<User> users=userService.getUsersByName(username);
          User user=userRepository.findByName(username);
 
         if (user == null) {
@@ -46,7 +46,6 @@ public class BookingAppUserDetailsService implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role));
         }
 
-//         return new UserDetailsImpl(users);
          return  new org.springframework.security.core.userdetails.User(user.getName(), passwordEncoder.encode(user.getPassword()), grantedAuthorities);
     }
 }
