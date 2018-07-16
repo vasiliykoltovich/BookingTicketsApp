@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Logout Page</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:if="${param.logout}">
+        <label>
+            You have been logged out.
+        </label>
+    </div>
+</div>
+</body>
+</html>

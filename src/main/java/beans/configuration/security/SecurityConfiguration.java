@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().disable();
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/getUserById/**").hasAuthority("REGISTERED_USER")
+                .antMatchers("/getUserById/**").hasAuthority("BOOKING_MANAGER")
                 .antMatchers("/getAuditoriums").hasAuthority("REGISTERED_USER")
                 .antMatchers("/getAuditoriumByName/**").hasAuthority("REGISTERED_USER")
                 .antMatchers("/getSeatsNumber/**").hasAuthority("REGISTERED_USER")
