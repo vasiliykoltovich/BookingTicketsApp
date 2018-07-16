@@ -20,12 +20,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Dmytro_Babichev
- * Date: 20/2/16
- * Time: 3:49 PM
- */
+
 @Configuration
 @PropertySource("classpath:db.properties")
 public class DataSourceConfiguration {
@@ -46,12 +41,9 @@ public class DataSourceConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource(url, user, password);
         driverManagerDataSource.setDriverClassName(driver);
-
-
         Resource initSchema = new ClassPathResource("schema.sql");
         DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
         DatabasePopulatorUtils.execute(databasePopulator, driverManagerDataSource);
-
         return driverManagerDataSource;
     }
 
@@ -59,8 +51,7 @@ public class DataSourceConfiguration {
     @ConditionalOnBean(name = "dataSource")
     @ConditionalOnMissingBean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
-                = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
         em.setPackagesToScan("beans");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
