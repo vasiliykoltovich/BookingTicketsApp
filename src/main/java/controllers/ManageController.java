@@ -12,14 +12,16 @@ public class ManageController extends GenericController {
         return "login";
     }
 
-//    @GetMapping(value="/logout")
-//    public String logout(){
-//        return "logout";
-//    }
-//
-//    @GetMapping(value="/denied")
-//    public String denied(){
-//        return "denied";
-//    }
+    @GetMapping(value="/logout")
+    public String logout(){
+        return "logout";
+    }
+
+
+
+    @GetMapping(value="/403")
+    public String denied(){
+        return "403";
+    }
 
 }
