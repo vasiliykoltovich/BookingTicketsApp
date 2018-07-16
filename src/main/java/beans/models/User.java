@@ -19,7 +19,8 @@ public class User {
     @Size(max = 100)
     private String password;
 
-    private Set<Role> roles = Stream.of(new Role(RoleName.REGISTERED_USER)).collect(Collectors.toCollection(HashSet::new));
+//    private Set<Role> roles = Stream.of(new Role(RoleName.REGISTERED_USER)).collect(Collectors.toCollection(HashSet::new));
+    private String roles = "REGISTERED_USER";
 
     public User() {
     }
@@ -31,13 +32,13 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(long id, String email, String name, LocalDate birthday, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+    public User(long id, String email, String name, LocalDate birthday, @NotBlank @Size(max = 100) String password, String roles) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.birthday = birthday;
         this.password = password;
-        this.roles = roles;
+
     }
 
     public User(String email, String name, LocalDate birthday) {
@@ -88,12 +89,18 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public void addRole(String role){
+        if(!this.roles.contains(role)){
+            this.roles=String.join(",",this.roles,role);
+        }
     }
 
     @Override

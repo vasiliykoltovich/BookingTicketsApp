@@ -11,10 +11,6 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="beans.models">
-    <!--<typedef name="RoleName" class="beans.models.RoleName">-->
-        <!--<param name="enumClass">beans.models.RoleName</param>-->
-        <!--<param name="useNamed">true</param>-->
-    <!--</typedef>-->
 
     <class name="User" table="USER">
         <id name="id" column="ID">
@@ -24,11 +20,12 @@
         <property name="name" column="NAME" type="string"/>
         <property name="birthday" type="java.time.LocalDate" column="EVENT_DATE"/>
         <property name="password" column="PASSWORD" type="string"/>
-        <set name="roles" table="USER_ROLE" cascade="all" lazy="false">
-            <key column="USER_ID" not-null="true"/>
-            <many-to-many column="ROLE_ID" class="beans.models.Role" />
+        <property name="roles" column="ROLES" type="string"/>
+        <!--<set name="roles" table="USER_ROLE" cascade="all" lazy="false">-->
+            <!--<key column="USER_ID" not-null="true"/>-->
+            <!--<many-to-many column="ROLE_ID" class="beans.models.Role" />-->
 
-        </set>
+        <!--</set>-->
     </class>
 
 </hibernate-mapping>
