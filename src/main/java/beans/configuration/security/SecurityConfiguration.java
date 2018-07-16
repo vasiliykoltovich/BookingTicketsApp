@@ -1,16 +1,12 @@
 package beans.configuration.security;
 
-import beans.services.UserService;
-import beans.services.security.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +18,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
+
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,8 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-          .antMatchers("/login").permitAll()
-         .antMatchers("/getUsers/**").hasAuthority("REGISTERED_USER")
+         .antMatchers("/getUserById/**").hasAuthority("REGISTERED_USER")
          .antMatchers("/getAuditoriums").hasAuthority("REGISTERED_USER")
          .antMatchers("/getAuditoriumByName/**").hasAuthority("REGISTERED_USER")
          .antMatchers("/getSeatsNumber/**").hasAuthority("REGISTERED_USER")
@@ -52,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                          .loginPage("/login").failureUrl("/login?error")
                                                          .usernameParameter("name")
                                                          .passwordParameter("password")
-                                                         .and().logout().logoutSuccessUrl("/login?logout")
+                                                         .and().logout().logoutSuccessUrl("/login?logout").deleteCookies("remember-me")
                                                          .and().csrf()
                                                          .and().exceptionHandling().accessDeniedPage("/403");
 
@@ -63,16 +61,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .and().logout().logoutSuccessUrl("/login?logout")
 //                .and().csrf().and().exceptionHandling().accessDeniedPage("/403");
 
-
-
-//        http.authorizeRequests().anyRequest().hasRole("REGISTERED_USER").and()
-//                .access("hasRole('BOOKING_MANAGER')").and().formLogin()
-//                .loginPage("/login").failureUrl("/login?error")
-//                .usernameParameter("name")
-//                .passwordParameter("password")
-//                .and().logout().logoutSuccessUrl("/login?logout")
-//                .and().csrf()
-//                .and().exceptionHandling().accessDeniedPage("/403");
 
     }
 
@@ -98,6 +86,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
+
 
 
 }
