@@ -10,31 +10,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("beans")
-//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers("/bookTicket/**")
-//                .access("hasRole('BOOKING_MANAGER')").and().formLogin()
-//                .loginPage("/login").failureUrl("/login?error")
-//                .usernameParameter("name")
-//                .passwordParameter("password")
-//                .and().logout().logoutSuccessUrl("/login?logout")
-//                .and().csrf()
-//                .and().exceptionHandling().accessDeniedPage("/403");
-//        http.csrf().disable();
-        http.headers().frameOptions().disable();
 
+        http.headers().frameOptions().disable();
         http.csrf().disable()
                 .authorizeRequests()
          .antMatchers("/getUserById/**").hasAuthority("REGISTERED_USER")
@@ -52,15 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                          .passwordParameter("password")
                                                          .and().logout().logoutSuccessUrl("/login?logout").deleteCookies("remember-me")
                                                          .and().csrf()
-                                                         .and().exceptionHandling().accessDeniedPage("/403");
-
-//
-//        http.authorizeRequests().antMatchers("/bookTicket").hasRole("BOOKING_MANAGER")
-//                .and().formLogin().loginPage("/login").failureUrl("/login?error")
-//                .usernameParameter("name").passwordParameter("password")
-//                .and().logout().logoutSuccessUrl("/login?logout")
-//                .and().csrf().and().exceptionHandling().accessDeniedPage("/403");
-
+                                                         .and().exceptionHandling().accessDeniedPage("/403")
+                .and().rememberMe().tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(120);
 
     }
 
@@ -71,7 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //restore
+//        auth.inMemoryAuthentication().withUser("user").password("user").roles("REGISTERED_USER");
     }
 
     @Bean
@@ -87,6 +76,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(dataSource);
+        return db;
+    }
 
 
 
