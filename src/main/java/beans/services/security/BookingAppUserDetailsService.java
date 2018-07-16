@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service("customUsersDetailsService")
+@Service
 @Component
-public class CustomUserDetailsService implements UserDetailsService {
+public class BookingAppUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
