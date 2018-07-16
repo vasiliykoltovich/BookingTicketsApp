@@ -3,10 +3,6 @@ package beans.models;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class User {
@@ -94,7 +90,9 @@ public class User {
     }
 
     public void setRoles(String roles) {
-        this.roles = roles;
+        if(roles!=null){
+            this.roles=String.join(",",this.roles,roles);
+        }
     }
 
     public void addRole(String role){
