@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("beans")
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -59,12 +61,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Only for BOOKING MANAGER ROLE
                 .antMatchers("/getBookedTicketsByUser**").hasAuthority("BOOKING_MANAGER").
 
-                 anyRequest().authenticated().and().formLogin().loginPage("/login")
-                .permitAll().failureUrl("/login?error").usernameParameter("name").passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/login?logout").permitAll()
+                 anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").permitAll().failureUrl("/login?error")
+                .usernameParameter("name").passwordParameter("password")
+                .and()
+                .logout().logoutSuccessUrl("/login?logout").permitAll()
 
                 .deleteCookies("remember-me")
-                .and().csrf().and().exceptionHandling().accessDeniedPage("/403")
+                .and().exceptionHandling().accessDeniedPage("/403")
                 .and().rememberMe()
                 .tokenRepository(persistentTokenRepository()).tokenValiditySeconds(120);
 
