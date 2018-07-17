@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--<th:block th:include="header :: header"></th:block>-->
-    <!--<#include "header.html">-->
+    <#include "header.html">
 <h2 class="users-list">Users:</h2>
 <table>
     <tr>

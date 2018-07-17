@@ -1,5 +1,6 @@
 package beans.configuration.security;
 
+import handlers.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -65,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("name").passwordParameter("password").permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login?logout").permitAll()
+                .logout().addLogoutHandler(customLogoutHandler()).permitAll()
 
                 .deleteCookies("remember-me")
                 .and().exceptionHandling().accessDeniedPage("/403")
@@ -79,6 +80,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    public CustomLogoutSuccessHandler customLogoutHandler() {
+        return new CustomLogoutSuccessHandler();
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
