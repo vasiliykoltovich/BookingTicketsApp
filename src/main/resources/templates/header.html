@@ -6,7 +6,7 @@
 
 <div class="container">
     <div th:fragment="header">
-        <form th:action="@{/j_spring_security_logout}" method="post">
+        <form th:action="@{/j_spring_security_logout}" method="post" >
             <div class="col-sm-2" style="padding-top: 30px;">
                      <span sec:authorize="isAuthenticated()">
                     <input type="submit" value="Sign Out"/>

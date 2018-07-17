@@ -6,10 +6,8 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<div>
 <!--<th:block th:include="header :: header"></th:block>-->
-    <#include "header.html">
-</div>
+    <!--<#include "header.html">-->
 <h2 class="users-list">Users:</h2>
 <table>
     <tr>

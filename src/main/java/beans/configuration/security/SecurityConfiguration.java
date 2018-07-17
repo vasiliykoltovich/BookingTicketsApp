@@ -62,8 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/getBookedTicketsByUser**").hasAuthority("BOOKING_MANAGER").
 
                  anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").permitAll().failureUrl("/login?error")
-                .usernameParameter("name").passwordParameter("password")
+                .formLogin().loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("name").passwordParameter("password").permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/login?logout").permitAll()
 
