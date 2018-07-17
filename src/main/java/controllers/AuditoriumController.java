@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.PermitAll;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class AuditoriumController extends  GenericController{
 
     @GetMapping("/getAuditoriums")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public ModelAndView getAuditoriums(){
 
         List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
@@ -34,7 +35,7 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getAuditoriumByName/{name}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public ModelAndView getAuditoriumByName(@PathVariable("name") String name) {
 
         Auditorium auditorium = auditoriumService.getByName(name);
@@ -48,7 +49,7 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getSeatsNumber/{name}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public ResponseEntity<Integer> getSeatsNumber(@PathVariable("name") String name) {
 
         Integer seatsNumber = auditoriumService.getSeatsNumber(name);
@@ -57,7 +58,7 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getVipSeats/{name}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public ResponseEntity<List<Integer>> getVipSeats(@PathVariable("name") String name) {
 
         List<Integer> vipSeats = auditoriumService.getVipSeats(name);

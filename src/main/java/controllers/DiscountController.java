@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.annotation.security.PermitAll;
 import java.time.LocalDateTime;
 
 @Controller
@@ -17,7 +18,7 @@ public class DiscountController extends GenericController {
 
 
     @GetMapping("/getDiscount")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public ResponseEntity<Double> getTicketPrice(@RequestParam("email") String email,
                                                  @RequestParam("event") String eventName,
                                                  @RequestParam("auditorium") String auditorium,

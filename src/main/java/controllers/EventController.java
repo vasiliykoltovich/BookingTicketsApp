@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.security.PermitAll;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,7 +50,7 @@ public class EventController extends GenericController {
     @Value("${upload.events.path}")
     private String path;
 
-    @GetMapping("/getEventByName/{name}")
+    @GetMapping("/getEventByName/{name}")   @PermitAll
     public ModelAndView getEventByName(@PathVariable("name") String name) {
         List<Event> events = eventService.getByName(name);
         ModelAndView view = new ModelAndView("events");
@@ -58,7 +59,7 @@ public class EventController extends GenericController {
 
     }
 
-    @GetMapping("/getEvent")
+    @GetMapping("/getEvent")   @PermitAll
     public ModelAndView getEvent(@RequestParam("name") String name,
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestParam("auditorium") String auditoriumName) {
@@ -72,7 +73,7 @@ public class EventController extends GenericController {
 
     }
 
-    @GetMapping("/getEventByRequest")
+    @GetMapping("/getEventByRequest")   @PermitAll
     public ResponseEntity<Event> getEvent(@RequestParam("name") String name,
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestBody Auditorium auditorium) {
@@ -87,7 +88,7 @@ public class EventController extends GenericController {
     }
 
 
-    @GetMapping("/getAllEvents")
+    @GetMapping("/getAllEvents")   @PermitAll
     public ModelAndView getAllEvents() {
         List<Event> events = eventService.getAll();
         ModelAndView view = new ModelAndView("events");
@@ -96,7 +97,7 @@ public class EventController extends GenericController {
     }
 
 
-    @PostMapping(path = "/createEvent")
+    @PostMapping(path = "/createEvent")   @PermitAll
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView createEvent(@RequestParam("name") String name,
                                     @RequestParam("rate") Rate rate,
@@ -113,7 +114,7 @@ public class EventController extends GenericController {
     }
 
     @DeleteMapping("/deleteEvent")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)   @PermitAll
     public void deleteEvent(@RequestBody Event eventTemplate) {
         eventService.remove(eventTemplate);
     }
@@ -131,7 +132,7 @@ public class EventController extends GenericController {
     }
 
     @GetMapping(path = "/getNextEvents")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)   @PermitAll
     public ModelAndView getNextEvents(
             @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         List<Event> events = eventService.getNextEvents(to);
@@ -140,7 +141,7 @@ public class EventController extends GenericController {
         return view;
     }
 
-    @PutMapping(path = "/assignAuditorium")
+    @PutMapping(path = "/assignAuditorium")   @PermitAll
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView assignAuditorium(@RequestParam("event") String eventName, @RequestParam("auditorium") String auditoriumName,
                                          @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -161,12 +162,12 @@ public class EventController extends GenericController {
     }
 
 
-    @GetMapping("/loadFiles")
+    @GetMapping("/loadFiles")   @PermitAll
     public ModelAndView uploading() {
         return new ModelAndView("upload");
     }
 
-    @PostMapping("/loadEvents")
+    @PostMapping("/loadEvents")   @PermitAll
     public ModelAndView loadEvents(@RequestParam MultipartFile file,
                                              RedirectAttributes redirectAttributes) {
         ModelAndView view = new ModelAndView("events");
