@@ -7,6 +7,7 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
+<#include "header.ftl">
 <h2 class="users-list">Upload Events:</h2>
 
 <form name="uploadingForm" enctype="multipart/form-data" action="/loadEvents" method="POST">

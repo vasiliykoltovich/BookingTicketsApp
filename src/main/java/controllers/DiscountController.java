@@ -5,6 +5,7 @@ import beans.models.User;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,8 @@ public class DiscountController extends GenericController {
 
 
     @GetMapping("/getDiscount")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ResponseEntity<Double> getTicketPrice(@RequestParam("email") String email,
                                                  @RequestParam("event") String eventName,
                                                  @RequestParam("auditorium") String auditorium,

@@ -42,6 +42,6 @@ public class BookingAppUserDetailsService implements UserDetailsService {
         List<String> roles = Arrays.asList(user.getRoles().split(",")).stream().collect(Collectors.toList());
         Set<GrantedAuthority> grantedAuthorities = roles.stream().map(r -> new SimpleGrantedAuthority(r)).collect(Collectors.toCollection(HashSet::new));
 
-        return  new org.springframework.security.core.userdetails.User(user.getName(), passwordEncoder.encode(user.getPassword()), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getName(), passwordEncoder.encode(user.getPassword()), grantedAuthorities);
     }
 }

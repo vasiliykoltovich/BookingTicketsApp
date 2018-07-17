@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<!--<th:block th:include="header :: header"></th:block>-->
-    <#include "header.html">
+<#include "header.ftl">
 <h2 class="users-list">Users:</h2>
 <table>
     <tr>

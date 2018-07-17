@@ -6,9 +6,8 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
+<#include "header.ftl">
 <h2 class="events-list">Auditories:</h2>
-
-
 <table>
     <tr>
         <th>Name</th>

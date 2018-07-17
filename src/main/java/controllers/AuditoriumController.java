@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,8 @@ import java.util.List;
 public class AuditoriumController extends  GenericController{
 
     @GetMapping("/getAuditoriums")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getAuditoriums(){
 
         List<Auditorium> auditoriums = auditoriumService.getAuditoriums();
@@ -35,7 +37,8 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getAuditoriumByName/{name}")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getAuditoriumByName(@PathVariable("name") String name) {
 
         Auditorium auditorium = auditoriumService.getByName(name);
@@ -49,7 +52,8 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getSeatsNumber/{name}")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ResponseEntity<Integer> getSeatsNumber(@PathVariable("name") String name) {
 
         Integer seatsNumber = auditoriumService.getSeatsNumber(name);
@@ -58,7 +62,8 @@ public class AuditoriumController extends  GenericController{
     }
 
     @GetMapping("/getVipSeats/{name}")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ResponseEntity<List<Integer>> getVipSeats(@PathVariable("name") String name) {
 
         List<Integer> vipSeats = auditoriumService.getVipSeats(name);

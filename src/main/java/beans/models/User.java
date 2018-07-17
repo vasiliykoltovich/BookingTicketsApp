@@ -12,7 +12,6 @@ public class User {
     private LocalDate birthday;
     private String password;
 
-//    private Set<Role> roles = Stream.of(new Role(RoleName.REGISTERED_USER)).collect(Collectors.toCollection(HashSet::new));
     private String roles = "REGISTERED_USER";
 
     public User() {
@@ -90,7 +89,7 @@ public class User {
     }
 
     public void setRoles(String roles) {
-        if(roles!=null){
+        if(roles!=null && !roles.equals(this.roles)){
             this.roles=String.join(",",this.roles,roles);
         }
     }

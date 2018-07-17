@@ -6,8 +6,8 @@ INSERT INTO AUDITORIUM (NAME, SEATS_NUMBER, VIP_SEATS) VALUES ('Yellow hall', 10
 
 DELETE FROM USER
 
-INSERT INTO USER (email,NAME,EVENT_DATE,PASSWORD) VALUES ('dmitriy.vbabichev@gmail.com', 'Dmytro Babichev', '1984-01-04','karramba');
-INSERT INTO USER (email,NAME,EVENT_DATE,PASSWORD) VALUES ('vasil.koltovich@gmail.com', 'Vasil Koltovich', '1985-11-16','karramba');
+INSERT INTO USER (email,NAME,EVENT_DATE,PASSWORD) VALUES ('dmitriy.vbabichev@gmail.com', 'Dmytro Babichev', '1984-01-04','123');
+INSERT INTO USER (email,NAME,EVENT_DATE,PASSWORD) VALUES ('vasil.koltovich@gmail.com', 'Vasil Koltovich', '1985-11-16','123');
 INSERT INTO USER (email,NAME,EVENT_DATE,PASSWORD) VALUES ('barabas@gmail.com', 'Karabas', '1985-11-16','karabas');
 DELETE FROM  EVENT
 

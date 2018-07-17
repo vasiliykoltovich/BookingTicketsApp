@@ -15,6 +15,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,7 +51,8 @@ public class EventController extends GenericController {
     @Value("${upload.events.path}")
     private String path;
 
-    @GetMapping("/getEventByName/{name}")   @PermitAll
+    @GetMapping("/getEventByName/{name}")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getEventByName(@PathVariable("name") String name) {
         List<Event> events = eventService.getByName(name);
         ModelAndView view = new ModelAndView("events");
@@ -59,7 +61,8 @@ public class EventController extends GenericController {
 
     }
 
-    @GetMapping("/getEvent")   @PermitAll
+    @GetMapping("/getEvent")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getEvent(@RequestParam("name") String name,
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestParam("auditorium") String auditoriumName) {
@@ -73,7 +76,8 @@ public class EventController extends GenericController {
 
     }
 
-    @GetMapping("/getEventByRequest")   @PermitAll
+    @GetMapping("/getEventByRequest")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ResponseEntity<Event> getEvent(@RequestParam("name") String name,
                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                  @RequestBody Auditorium auditorium) {
@@ -88,7 +92,8 @@ public class EventController extends GenericController {
     }
 
 
-    @GetMapping("/getAllEvents")   @PermitAll
+    @GetMapping("/getAllEvents")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getAllEvents() {
         List<Event> events = eventService.getAll();
         ModelAndView view = new ModelAndView("events");
@@ -97,7 +102,8 @@ public class EventController extends GenericController {
     }
 
 
-    @PostMapping(path = "/createEvent")   @PermitAll
+    @PostMapping(path = "/createEvent")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView createEvent(@RequestParam("name") String name,
                                     @RequestParam("rate") Rate rate,
@@ -114,13 +120,15 @@ public class EventController extends GenericController {
     }
 
     @DeleteMapping("/deleteEvent")
-    @ResponseStatus(HttpStatus.OK)   @PermitAll
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @ResponseStatus(HttpStatus.OK)
     public void deleteEvent(@RequestBody Event eventTemplate) {
         eventService.remove(eventTemplate);
     }
 
 
     @GetMapping(path = "/getForDateRange")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView getForDateRange(
                                     @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
@@ -132,7 +140,8 @@ public class EventController extends GenericController {
     }
 
     @GetMapping(path = "/getNextEvents")
-    @ResponseStatus(HttpStatus.CREATED)   @PermitAll
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView getNextEvents(
             @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         List<Event> events = eventService.getNextEvents(to);
@@ -141,7 +150,8 @@ public class EventController extends GenericController {
         return view;
     }
 
-    @PutMapping(path = "/assignAuditorium")   @PermitAll
+    @PutMapping(path = "/assignAuditorium")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView assignAuditorium(@RequestParam("event") String eventName, @RequestParam("auditorium") String auditoriumName,
                                          @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -162,12 +172,14 @@ public class EventController extends GenericController {
     }
 
 
-    @GetMapping("/loadFiles")   @PermitAll
+    @GetMapping("/loadFiles")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView uploading() {
         return new ModelAndView("upload");
     }
 
-    @PostMapping("/loadEvents")   @PermitAll
+    @PostMapping("/loadEvents")
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView loadEvents(@RequestParam MultipartFile file,
                                              RedirectAttributes redirectAttributes) {
         ModelAndView view = new ModelAndView("events");
