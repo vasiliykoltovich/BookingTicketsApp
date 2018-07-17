@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.headers().frameOptions().disable();
-        http.csrf().disable().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/getUserById/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
                 .antMatchers("/getAuditoriums").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
                 .antMatchers("/getAuditoriumByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
@@ -62,11 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                  anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .permitAll().failureUrl("/login?error").usernameParameter("name").passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/login?logout").permitAll()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-//
-//
-//                .logoutSuccessUrl(
-//                "/login?logout")
+
                 .deleteCookies("remember-me")
                 .and().csrf().and().exceptionHandling().accessDeniedPage("/403")
                 .and().rememberMe()
