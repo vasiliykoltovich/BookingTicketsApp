@@ -75,11 +75,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //restore
-//        auth.inMemoryAuthentication().withUser("user").password("user").roles("REGISTERED_USER");
-    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){

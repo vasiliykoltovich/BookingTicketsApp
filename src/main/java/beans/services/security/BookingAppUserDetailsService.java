@@ -33,19 +33,15 @@ public class BookingAppUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-         User user=userRepository.findByName(username);
+        User user = userRepository.findByName(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        List<String> roles= Arrays.asList(user.getRoles().split(",")).stream().collect(Collectors.toList());
+        List<String> roles = Arrays.asList(user.getRoles().split(",")).stream().collect(Collectors.toList());
+        Set<GrantedAuthority> grantedAuthorities = roles.stream().map(r -> new SimpleGrantedAuthority(r)).collect(Collectors.toCollection(HashSet::new));
 
-        for(String role: roles){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role));
-        }
-
-         return  new org.springframework.security.core.userdetails.User(user.getName(), passwordEncoder.encode(user.getPassword()), grantedAuthorities);
+        return  new org.springframework.security.core.userdetails.User(user.getName(), passwordEncoder.encode(user.getPassword()), grantedAuthorities);
     }
 }

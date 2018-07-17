@@ -5,13 +5,8 @@
 </head>
 <body>
 <div class="container">
-
     <div th:if="${param.error}">
         <label style="color:red">Username or Password is wrong! Please check again.</label>
-    </div>
-
-    <div th:if="${param.error}">
-        <label style="color:green">Access Denied.</label>
     </div>
     <div th:if="${param.logout}">
         <label>
