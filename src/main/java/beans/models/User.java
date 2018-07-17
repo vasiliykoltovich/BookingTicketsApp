@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String name;
     private LocalDate birthday;
-    @NotBlank
+//    @NotBlank
     @Size(max = 100)
     private String password;
 
@@ -28,13 +28,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(long id, String email, String name, LocalDate birthday, @NotBlank @Size(max = 100) String password, String roles) {
+    public User(long id, String email, String name, LocalDate birthday, @Size(max = 100) String password) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.birthday = birthday;
         this.password = password;
-
     }
 
     public User(String email, String name, LocalDate birthday) {

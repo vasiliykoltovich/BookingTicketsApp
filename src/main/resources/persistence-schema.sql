@@ -1,3 +1,5 @@
+DROP TABLE PERSISTENT_LOGINS;
+
 CREATE TABLE PERSISTENT_LOGINS (
     username varchar(64) not null,
     series varchar(64) not null,

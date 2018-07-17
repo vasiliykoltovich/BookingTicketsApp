@@ -13,7 +13,6 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
@@ -41,7 +40,7 @@ public class DataSourceConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource(url, user, password);
         driverManagerDataSource.setDriverClassName(driver);
-        Resource initSchema = new ClassPathResource("schema.sql");
+        Resource initSchema = new ClassPathResource("persistence-schema.sql");
         DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
         DatabasePopulatorUtils.execute(databasePopulator, driverManagerDataSource);
         return driverManagerDataSource;
