@@ -69,7 +69,6 @@ public class EventController extends GenericController {
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", events);
         return view;
-//        return new ResponseEntity<Event>(event, HttpStatus.OK);
 
     }
 
@@ -83,8 +82,7 @@ public class EventController extends GenericController {
         events.add(event);
         ModelAndView view = new ModelAndView("events");
         view.addObject("events", events);
-//        return view;
-        return new ResponseEntity<Event>(event, HttpStatus.OK);
+        return new ResponseEntity<>(event, HttpStatus.OK);
 
     }
 
@@ -96,15 +94,7 @@ public class EventController extends GenericController {
         view.addObject("events", events);
         return view;
     }
-//
-//    @PostMapping(path = "/createEvent", consumes = "application/json", produces = "application/json")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public ResponseEntity<Event> createEvent(@RequestBody Event eventTemplate) {
-//        Event event = service.create(eventTemplate);
-//                ModelAndView view = new ModelAndView("events");
-//                view.addObject("event", event);
-//        return new ResponseEntity<Event>(event, HttpStatus.OK);
-//    }
+
 
     @PostMapping(path = "/createEvent")
     @ResponseStatus(HttpStatus.CREATED)

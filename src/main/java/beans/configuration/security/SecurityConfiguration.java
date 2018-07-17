@@ -35,9 +35,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/getAuditoriumByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
                 .antMatchers("/getSeatsNumber/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
                 .antMatchers("/getVipSeats/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-                .antMatchers("/getTicketPrice/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-                .antMatchers("/getTicketForEvent/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-                .antMatchers("/bookTicket**").hasAuthority("BOOKING_MANAGER").
+                .antMatchers("/getTicketPrice**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getTicketForEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+
+                .antMatchers("/getDiscount**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getEventByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getAllEvents").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/createEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/deleteEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getForDateRange**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getNextEvents**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/loadFiles**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/loadEvents**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+
+                .antMatchers("/getUserByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/getUserByEmail/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/createUser**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/deleteUserByEmail**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/loadUsers**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                .antMatchers("/bookTicket**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
+                //Only for BOOKING MANAGER ROLE
+                .antMatchers("/getBookedTicketsByUser**").hasAuthority("BOOKING_MANAGER").
 
                  anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .permitAll().failureUrl("/login?error").usernameParameter("name").passwordParameter("password")

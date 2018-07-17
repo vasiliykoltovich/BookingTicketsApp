@@ -40,7 +40,7 @@ public class DataSourceConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource(url, user, password);
         driverManagerDataSource.setDriverClassName(driver);
-        Resource initSchema = new ClassPathResource("persistence-schema.sql");
+        Resource initSchema = new ClassPathResource("remember-me-schema.sql");
         DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema);
         DatabasePopulatorUtils.execute(databasePopulator, driverManagerDataSource);
         return driverManagerDataSource;

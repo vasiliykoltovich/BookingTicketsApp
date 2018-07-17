@@ -70,12 +70,29 @@ public class UsersController extends GenericController {
         return view;
     }
 
-    @PostMapping(path = "/createUser")
+    @PostMapping(path = "/createUser",params = {"email,name,date,password"})
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView createUser(@RequestParam String email, @RequestParam String name,
-                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        User user = userService.register(new User(email, name, date));
+                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                   @RequestParam("password")  String password) {
+        User user = userService.register(new User(email, name, date,password));
         List<User> users=new ArrayList<>();
+        users.add(user);
+        ModelAndView view = new ModelAndView("users");
+        view.addObject("users", users);
+        return view;
+    }
+
+
+    @PostMapping(path = "/createUser",params = {"email,name,date,password,role"})
+    public ModelAndView createUserWithAdditionalRoles(@RequestParam String email, @RequestParam String name,
+                                   @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                      @RequestParam("password") String password,@RequestParam("role") String role) {
+        User user = userService.register(new User(email, name, date,password));
+        if (user != null) {
+            user.addRole(role);
+        }
+        List<User> users = new ArrayList<>();
         users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
@@ -124,17 +141,5 @@ public class UsersController extends GenericController {
         return view;
 
     }
-
-
-//    //pdf
-//    @GetMapping(value = "/getBookedTickets", produces = MediaType.APPLICATION_PDF_VALUE)
-//    public ModelAndView getBookedTickets(@RequestParam("email") String email) {
-//        User user = userService.getUserByEmail(email);
-////        List<Ticket> bookedTickets =
-//        ModelAndView  view = new ModelAndView("users");
-//        view.addObject("users", user);
-//        return view;
-//    }
-
 
 }

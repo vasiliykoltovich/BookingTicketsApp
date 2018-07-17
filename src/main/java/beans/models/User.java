@@ -1,6 +1,5 @@
 package beans.models;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -11,8 +10,6 @@ public class User {
     private String email;
     private String name;
     private LocalDate birthday;
-//    @NotBlank
-    @Size(max = 100)
     private String password;
 
 //    private Set<Role> roles = Stream.of(new Role(RoleName.REGISTERED_USER)).collect(Collectors.toCollection(HashSet::new));
@@ -28,7 +25,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(long id, String email, String name, LocalDate birthday, @Size(max = 100) String password) {
+    public User(long id, String email, String name, LocalDate birthday,String password) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -38,6 +35,10 @@ public class User {
 
     public User(String email, String name, LocalDate birthday) {
         this(-1, email, name, birthday);
+    }
+
+    public User(String email, String name, LocalDate birthday,String password) {
+        this(-1, email, name, birthday,password);
     }
 
     public User withId(long id) {
