@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -60,9 +61,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                  anyRequest().authenticated().and().formLogin().loginPage("/login")
                 .permitAll().failureUrl("/login?error").usernameParameter("name").passwordParameter("password")
-                .and().logout().permitAll()
-                .logoutSuccessUrl(
-                "/login?logout")
+                .and().logout().logoutSuccessUrl("/login?logout").permitAll()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+//
+//
+//                .logoutSuccessUrl(
+//                "/login?logout")
                 .deleteCookies("remember-me")
                 .and().csrf().and().exceptionHandling().accessDeniedPage("/403")
                 .and().rememberMe()

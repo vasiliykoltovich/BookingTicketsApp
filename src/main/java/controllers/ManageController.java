@@ -11,11 +11,11 @@ public class ManageController extends GenericController {
     public String login() {
         return "login";
     }
+//    @PostMapping("/login?logout")
+//    public String logout() {
+//        return "login";
+//    }
 
-    @PostMapping(value = "/logout")
-    public String logout() {
-        return "logout";
-    }
 
     @GetMapping(value = "/403")
     public String denied() {
