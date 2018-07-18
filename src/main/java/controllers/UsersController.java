@@ -67,19 +67,7 @@ public class UsersController extends GenericController {
         return view;
     }
 
-    @PostMapping(path = "/createUser", consumes = "application/json", produces = "application/json")
-    @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
-    public ModelAndView createUser(@RequestBody User userRequest) {
-        User user = userService.register(new User(userRequest.getEmail(), userRequest.getName(), userRequest.getBirthday()));
-        List<User> users=new ArrayList<>();
-        users.add(user);
-                ModelAndView view = new ModelAndView("users");
-                view.addObject("users", users);
-        return view;
-    }
-
-    @PostMapping(path = "/createUser",params = {"email,name,date,password"})
+    @PostMapping(path = "/createUser",params = {"email","name","date","password"})
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView createUser(@RequestParam String email, @RequestParam String name,
@@ -93,15 +81,12 @@ public class UsersController extends GenericController {
         return view;
     }
 
-    @PostMapping(path = "/createUser",params = {"email,name,date,password,role"})
+    @PostMapping(path = "/createUser",params = {"email","name","date","password","role"})
     @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView createUserWithAdditionalRoles(@RequestParam String email, @RequestParam String name,
                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                                       @RequestParam("password") String password,@RequestParam("role") String role) {
-        User user = userService.register(new User(email, name, date,password));
-        if (user != null) {
-            user.addRole(role);
-        }
+        User user = userService.register(new User(email, name, date,password,role));
         List<User> users = new ArrayList<>();
         users.add(user);
         ModelAndView view = new ModelAndView("users");

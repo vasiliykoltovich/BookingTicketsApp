@@ -2,6 +2,9 @@ package beans.models;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class User {
@@ -32,6 +35,15 @@ public class User {
         this.password = password;
     }
 
+    public User(long id, String email, String name, LocalDate birthday,String password,String role) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.password = password;
+        this.setRoles(role);
+    }
+
     public User(String email, String name, LocalDate birthday) {
         this(-1, email, name, birthday);
     }
@@ -39,9 +51,12 @@ public class User {
     public User(String email, String name, LocalDate birthday,String password) {
         this(-1, email, name, birthday,password);
     }
+    public User(String email, String name, LocalDate birthday,String password,String role) {
+        this(-1, email, name, birthday,password,role);
+    }
 
     public User withId(long id) {
-        return new User(id, email, name, birthday);
+        return new User(id, email, name, birthday,password,roles);
     }
 
     public long getId() {
@@ -88,18 +103,12 @@ public class User {
         return roles;
     }
 
-    public void setRoles(String roles) {
-        if(roles!=null && !roles.equals(this.roles)){
-            this.roles=String.join(",",this.roles,roles);
+    public void setRoles(String role) {
+        if(role!=null &&!this.roles.contains(role) && !role.equals(this.roles)){
+           this.roles=String.join(",",this.roles,role);
+           this.roles= String.join(",",new HashSet<>(Arrays.asList(roles.split(","))));
         }
     }
-
-    public void addRole(String role){
-        if(!this.roles.contains(role)){
-            this.roles=String.join(",",this.roles,role);
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -131,10 +140,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-               "id=" + id +
-               ", email='" + email + '\'' +
-               ", name='" + name + '\'' +
-               ", birthday=" + birthday +
-               '}';
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }

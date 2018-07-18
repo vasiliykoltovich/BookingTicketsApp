@@ -35,34 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable().authorizeRequests().
-//                .antMatchers("/getUserById/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getAuditoriums").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getAuditoriumByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getSeatsNumber/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getVipSeats/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getTicketPrice**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getTicketForEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//
-//                .antMatchers("/getDiscount**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getEventByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getAllEvents").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/createEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/deleteEvent**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getForDateRange**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getNextEvents**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/loadFiles**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/loadEvents**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//
-//                .antMatchers("/getUserByName/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/getUserByEmail/**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/createUser**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/deleteUserByEmail**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/loadUsers**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                .antMatchers("/bookTicket**").hasAnyAuthority("BOOKING_MANAGER","REGISTERED_USER")
-//                //Only for BOOKING MANAGER ROLE
-//                .antMatchers("/getBookedTicketsByUser**").hasAuthority("BOOKING_MANAGER").
-
                  anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")
@@ -82,10 +54,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //restore
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //restore
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
@@ -95,10 +67,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(authenticationProvider());
+//    }
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
