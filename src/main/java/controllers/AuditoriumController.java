@@ -32,7 +32,6 @@ public class AuditoriumController extends  GenericController{
         ModelAndView view = new ModelAndView("auditories");
         view.addObject("auditoriums", auditoriums);
         return view;
-//        return new ResponseEntity<>(auditoriums,HttpStatus.OK);
 
     }
 
@@ -47,7 +46,6 @@ public class AuditoriumController extends  GenericController{
         auditoriums.add(auditorium);
         view.addObject("auditoriums", auditoriums);
         return view;
-        //        return new ResponseEntity<>(auditorium,HttpStatus.OK);
 
     }
 

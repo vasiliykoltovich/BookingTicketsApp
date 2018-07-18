@@ -202,7 +202,7 @@ public class EventController extends GenericController {
             throw  new RuntimeException(e);
         }
 
-     view.addObject("events", newEvents);
+        view.addObject("events", newEvents);
         return getAllEvents();
 
     }

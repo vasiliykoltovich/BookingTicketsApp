@@ -50,7 +50,6 @@ public class UsersController extends GenericController {
         List<User> users=new ArrayList<>();
         users.add(user);
         ModelAndView view = new ModelAndView("users");
-//        ModelAndView view = new ModelAndView("usser");
         view.addObject("users", users);
         return view;
 

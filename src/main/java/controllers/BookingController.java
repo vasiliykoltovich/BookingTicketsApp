@@ -60,7 +60,6 @@ public class BookingController extends GenericController {
         ModelAndView view = new ModelAndView("tickets");
         view.addObject("tickets", tickets);
         return view;
-//        return new ResponseEntity<>(booked, HttpStatus.CREATED);
 
     }
 
@@ -73,7 +72,6 @@ public class BookingController extends GenericController {
         List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditorium, date);
         ModelAndView view = new ModelAndView("tickets");
         view.addObject("tickets", tickets);
-//        return new ResponseEntity<>(tickets, HttpStatus.OK);
         return  view;
 
     }

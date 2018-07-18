@@ -1,10 +1,8 @@
 package beans.models;
 
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 
 public class User {
