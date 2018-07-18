@@ -63,15 +63,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                //Only for BOOKING MANAGER ROLE
 //                .antMatchers("/getBookedTicketsByUser**").hasAuthority("BOOKING_MANAGER").
 
-                 anyRequest().fullyAuthenticated().and()
+                 anyRequest().fullyAuthenticated()
+                .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("name").passwordParameter("password").permitAll()
                 .and()
-                .logout().invalidateHttpSession(true).logoutUrl("/logout").logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID")
-                .deleteCookies("remember-me").permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403")
-                .and().rememberMe()
-                .tokenRepository(persistentTokenRepository()).tokenValiditySeconds(120);
+                .logout().invalidateHttpSession(true).logoutSuccessUrl("/login?logout")
+                .deleteCookies("JSESSIONID","remember-me").permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .rememberMe().tokenRepository(persistentTokenRepository()).tokenValiditySeconds(120);
 
     }
 
