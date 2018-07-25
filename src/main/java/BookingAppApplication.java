@@ -1,3 +1,4 @@
+import beans.daos.UserAccountRepository;
 import beans.services.security.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +15,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class},
         scanBasePackages = {"beans","controllers"})
 @ComponentScan(basePackages = {"beans","controllers"})
-@EnableJpaRepositories(basePackageClasses = UserRepository.class)
+@EnableJpaRepositories(basePackageClasses = {UserRepository.class,UserAccountRepository.class})
 public class BookingAppApplication {
 
     public static void main(String[] args) {

@@ -21,9 +21,8 @@
         <property name="birthday" type="java.time.LocalDate" column="EVENT_DATE"/>
         <property name="password" column="PASSWORD" type="string"/>
         <property name="roles" column="ROLES" type="string"/>
-        <!--<property name="roles" type="string">-->
-            <!--<column name="roles"  not-null="true" default="REGISTERED_USER"/>-->
-        <!--</property>-->
+        <one-to-one name="userAccount" cascade="all" class="UserAccount" />
+
     </class>
 
 </hibernate-mapping>

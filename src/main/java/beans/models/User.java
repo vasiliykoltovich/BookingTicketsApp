@@ -12,8 +12,8 @@ public class User {
     private String name;
     private LocalDate birthday;
     private String password;
-
     private String roles = "REGISTERED_USER";
+    private UserAccount userAccount;
 
     public User() {
     }
@@ -51,6 +51,14 @@ public class User {
     }
     public User(String email, String name, LocalDate birthday,String password,String role) {
         this(-1, email, name, birthday,password,role);
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     public User withId(long id) {

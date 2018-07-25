@@ -1,11 +1,7 @@
 package beans.services;
 
 import beans.daos.BookingDAO;
-import beans.models.Auditorium;
-import beans.models.Event;
-import beans.models.Rate;
-import beans.models.Ticket;
-import beans.models.User;
+import beans.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,6 +31,8 @@ public class BookingServiceImpl implements BookingService {
     private final UserService userService;
     private final BookingDAO        bookingDAO;
     private final DiscountService   discountService;
+    @Autowired
+    private  UserAccountService userAccountService;
     final         int               minSeatNumber;
     final         double            vipSeatPriceMultiplier;
     final         double            highRatedPriceMultiplier;
@@ -157,6 +154,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Ticket bookAndReturnTicket(User user, Ticket ticket) {
         Ticket newticket=null;
+
         if (Objects.isNull(user)) {
             throw new NullPointerException("User is [null]");
         }
@@ -171,9 +169,22 @@ public class BookingServiceImpl implements BookingService {
 
         if (!seatsAreAlreadyBooked)
             newticket=bookingDAO.create(user, ticket);
+
+        if(newticket!=null){
+            UserAccount userAccount=userAccountService.getByUser(foundUser);
+            if(userAccountService.checkAccountBalance(foundUser)>=newticket.getPrice()){
+                if(userAccountService.withDrawMoney(newticket.getPrice(),userAccount)){
+                    return newticket;
+                }else{
+
+                    throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Not enough money.");
+                }
+            }
+        }
         else
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
 
+        //
         return newticket;
     }
 

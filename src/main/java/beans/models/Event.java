@@ -16,12 +16,17 @@ public class Event {
     private double        basePrice;
     private LocalDateTime dateTime;
     private Auditorium auditorium;
+    private double ticketPrice;
 
     public Event() {
     }
 
     public Event(String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
         this(-1, name, rate, basePrice, dateTime, auditorium);
+    }
+
+    public Event(String name, Rate rate, double basePrice, double ticketPrice, LocalDateTime dateTime, Auditorium auditorium) {
+        this(-1, name, rate, basePrice,ticketPrice, dateTime, auditorium);
     }
 
     public Event(long id, String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
@@ -33,8 +38,26 @@ public class Event {
         this.auditorium = auditorium;
     }
 
+    public Event(long id, String name, Rate rate, double basePrice,double ticketPrice, LocalDateTime dateTime, Auditorium auditorium) {
+        this.id = id;
+        this.name = name;
+        this.rate = rate;
+        this.basePrice = basePrice;
+        this.dateTime = dateTime;
+        this.auditorium = auditorium;
+        this.ticketPrice=ticketPrice;
+    }
+
     public Event withId(Long eventId) {
         return new Event(eventId, this.name, this.rate, this.basePrice, this.dateTime, this.auditorium);
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 
     public long getId() {
