@@ -28,3 +28,6 @@ Ex associate transaction manager with Jpa Repositories:
 @EnableJpaRepositories(transactionManagerRef="transactionManager",
     entityManagerFactoryRef="entityManagerFactory",
     value="com.repositories.pkg.location" )
+
+
+    https://stackoverflow.com/questions/30870146/transactional-annotation-not-working-in-spring-boot
