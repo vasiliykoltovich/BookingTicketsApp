@@ -26,6 +26,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:db.properties")
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class DataSourceConfiguration {
 
     @Value("${jdbc.driver}")

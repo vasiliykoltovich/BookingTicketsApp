@@ -13,3 +13,18 @@ Task description:
 3. Configure appropriate PlatformTransactionManager implementation in Spring application context.
 
 4. Make ticket booking methods transactional using Spring declarative transactions management (either xml or annotation based config).
+
+
+
+1
+down vote
+I think you forgot to enable Jpa Transaction or to associate Spring Data with the transaction manager:
+
+Ex enable transaction management:
+
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+Ex associate transaction manager with Jpa Repositories:
+
+@EnableJpaRepositories(transactionManagerRef="transactionManager",
+    entityManagerFactoryRef="entityManagerFactory",
+    value="com.repositories.pkg.location" )

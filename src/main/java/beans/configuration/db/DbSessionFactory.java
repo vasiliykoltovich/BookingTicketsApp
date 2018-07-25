@@ -32,8 +32,8 @@ import java.util.Properties;
  * Time: 4:00 PM
  */
 @Configuration
-//@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-@EnableTransactionManagement
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+//@EnableTransactionManagement()
 @PropertySource("classpath:db.properties")
 public class DbSessionFactory {
 
