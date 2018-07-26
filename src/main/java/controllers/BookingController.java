@@ -3,6 +3,7 @@ package controllers;
 import beans.models.Event;
 import beans.models.Ticket;
 import beans.models.User;
+import beans.models.UserAccount;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -55,13 +56,25 @@ public class BookingController extends GenericController {
         Event event = eventService.getEvent(eventName, auditoriumService.getByName(auditorium), date);
         double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
         Ticket booked = bookingService.bookAndReturnTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(booked);
         ModelAndView view = new ModelAndView("tickets");
-        view.addObject("tickets", tickets);
-        return view;
+        if (booked != null) {
+            UserAccount userAccount = userAccountService.getByUser(user);
+            if (userAccountService.checkAccountBalance(user) >= booked.getPrice()) {
+                if (userAccountService.withDrawMoney(booked.getPrice(), userAccount)) {
+                    List<Ticket> tickets = new ArrayList<>();
+                    tickets.add(booked);
+                    view.addObject("tickets", tickets);
 
+                } else {
+                    throw new IllegalStateException("Unable to book ticket: [" + booked + "]. Not enough money.");
+                }
+            }
+        }
+
+        return view;
     }
+
+
 
     @GetMapping(value = "/getTicketForEvent", params = {"event","auditorium", "date"})
     @PreAuthorize("hasAuthority('BOOKING_MANAGER')")

@@ -10,12 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class},
         scanBasePackages = {"beans","controllers"})
 @ComponentScan(basePackages = {"beans","controllers"})
-@EnableJpaRepositories(basePackageClasses = {UserRepository.class,UserAccountRepository.class})
+@EnableJpaRepositories(basePackageClasses = {UserRepository.class,UserAccountRepository.class
+        })
 public class BookingAppApplication {
 
     public static void main(String[] args) {
@@ -31,5 +33,6 @@ public class BookingAppApplication {
         registrationBean.addUrlPatterns("/*");
         return registrationBean;
     }
+
 
 }

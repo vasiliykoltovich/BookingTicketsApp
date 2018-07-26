@@ -26,6 +26,9 @@ public abstract class GenericController {
     @Autowired
     protected  DiscountService discountService;
 
+    @Autowired
+    protected   UserAccountService userAccountService;
+
 
     @ExceptionHandler(Exception.class)
     public ModelAndView errorHandle(Exception ex) {

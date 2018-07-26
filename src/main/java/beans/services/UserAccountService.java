@@ -8,5 +8,6 @@ public interface UserAccountService {
     double checkAccountBalance(UserAccount account);
     double checkAccountBalance(User user);
     boolean withDrawMoney(double ticketPrice,UserAccount account);
+    UserAccount saveToDb(UserAccount account);
 
 }

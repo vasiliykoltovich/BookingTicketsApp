@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Component
+@Transactional
 public class BookingAppUserDetailsService implements UserDetailsService {
 
     @Autowired

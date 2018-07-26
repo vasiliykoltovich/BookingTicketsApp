@@ -31,8 +31,8 @@ public class BookingServiceImpl implements BookingService {
     private final UserService userService;
     private final BookingDAO        bookingDAO;
     private final DiscountService   discountService;
-    @Autowired
-    private  UserAccountService userAccountService;
+//    @Autowired
+//    private  UserAccountService userAccountService;
     final         int               minSeatNumber;
     final         double            vipSeatPriceMultiplier;
     final         double            highRatedPriceMultiplier;
@@ -170,17 +170,17 @@ public class BookingServiceImpl implements BookingService {
         if (!seatsAreAlreadyBooked)
             newticket=bookingDAO.create(user, ticket);
 
-        if(newticket!=null){
-            UserAccount userAccount=userAccountService.getByUser(foundUser);
-            if(userAccountService.checkAccountBalance(foundUser)>=newticket.getPrice()){
-                if(userAccountService.withDrawMoney(newticket.getPrice(),userAccount)){
-                    return newticket;
-                }else{
-
-                    throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Not enough money.");
-                }
-            }
-        }
+//        if(newticket!=null){
+//            UserAccount userAccount=userAccountService.getByUser(foundUser);
+//            if(userAccountService.checkAccountBalance(foundUser)>=newticket.getPrice()){
+//                if(userAccountService.withDrawMoney(newticket.getPrice(),userAccount)){
+//                    return newticket;
+//                }else{
+//
+//                    throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Not enough money.");
+//                }
+//            }
+//        }
         else
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
 
