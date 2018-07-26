@@ -169,22 +169,9 @@ public class BookingServiceImpl implements BookingService {
 
         if (!seatsAreAlreadyBooked)
             newticket=bookingDAO.create(user, ticket);
-
-//        if(newticket!=null){
-//            UserAccount userAccount=userAccountService.getByUser(foundUser);
-//            if(userAccountService.checkAccountBalance(foundUser)>=newticket.getPrice()){
-//                if(userAccountService.withDrawMoney(newticket.getPrice(),userAccount)){
-//                    return newticket;
-//                }else{
-//
-//                    throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Not enough money.");
-//                }
-//            }
-//        }
         else
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
 
-        //
         return newticket;
     }
 
