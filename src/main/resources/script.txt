@@ -71,6 +71,7 @@ http://localhost:8100/fillInMoney?email=vasil.koltovich@gmail.com&summ=500
 
 
 
+http://localhost:8100/getTicketPrice?eventName=The%20revenant&auditorium=Blue%20hall&date=2018-01-04T00:00&email=vasil.koltovich@gmail.com&seats=48,49,67
 
 
 

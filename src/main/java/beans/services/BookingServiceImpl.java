@@ -102,17 +102,6 @@ public class BookingServiceImpl implements BookingService {
         final double simpleSeatsPrice = simpleSeats.size() * seatPrice;
         final double vipSeatsPrice = vipSeats.size() * vipSeatPrice;
 
-        //        System.out.println("auditoriumVipSeats = " + auditoriumVipSeats);
-        //        System.out.println("baseSeatPrice = " + baseSeatPrice);
-        //        System.out.println("rateMultiplier = " + rateMultiplier);
-        //        System.out.println("vipSeatPriceMultiplier = " + vipSeatPriceMultiplier);
-        //        System.out.println("seatPrice = " + seatPrice);
-        //        System.out.println("vipSeatPrice = " + vipSeatPrice);
-        //        System.out.println("discount = " + discount);
-        //        System.out.println("seats = " + seats);
-        //        System.out.println("simpleSeats.size() = " + simpleSeats.size());
-        //        System.out.println("vipSeats.size() = " + vipSeats.size());
-
         final double totalPrice = simpleSeatsPrice + vipSeatsPrice;
 
         return (1.0 - discount) * totalPrice;
