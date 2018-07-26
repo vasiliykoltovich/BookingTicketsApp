@@ -36,13 +36,16 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class,propagation=Propagation.REQUIRED)
     public boolean withDrawMoney(double ticketPrice, UserAccount account) {
-        double balance = account.getPrepaidMoney() - ticketPrice;
+        double initialBalance=account.getPrepaidMoney();
+        double balance = initialBalance - ticketPrice;
         if (balance > 0) {
             account.setPrepaidMoney(balance);
-            saveToDb(account);
-            return true;
+            UserAccount newOne=saveToDb(account);
+            if(newOne.getPrepaidMoney()<initialBalance) {
+                return true;
+            }
         }
         return false;
     }
@@ -50,6 +53,14 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     @Transactional(rollbackFor = Exception.class,propagation=Propagation.REQUIRED)
     public UserAccount saveToDb(UserAccount account) {
-        return userAccountDao.update(account);
+          UserAccount updated=null;
+        try{
+            updated=userAccountDao.update(account);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Saving is not completed");
+        }
+
+        return updated;
     }
 }
