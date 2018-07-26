@@ -2,7 +2,6 @@ package beans.aspects;
 
 import beans.aspects.mocks.LuckyWinnerAspectMock;
 import beans.configuration.AppConfiguration;
-import beans.configuration.db.DataSourceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.BookingDAOBookingMock;
 import beans.daos.mocks.DBAuditoriumDAOMock;
@@ -16,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,7 +33,7 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:20 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class, DataSourceConfiguration.class, DbSessionFactory.class,
+@ContextConfiguration(classes = {AppConfiguration.class,  DbSessionFactory.class,
                                  beans.configuration.TestAspectsConfiguration.class})
 @Transactional
 //@SpringBootTest

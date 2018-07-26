@@ -2,7 +2,6 @@ package beans.services;
 
 import beans.configuration.AppConfiguration;
 import beans.configuration.TestEventServiceConfiguration;
-import beans.configuration.db.DataSourceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.EventDAOMock;
 import beans.models.Auditorium;
@@ -15,8 +14,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -39,7 +36,7 @@ import static org.junit.Assert.assertTrue;
  * Time: 1:23 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class, DataSourceConfiguration.class, DbSessionFactory.class,
+@ContextConfiguration(classes = {AppConfiguration.class,  DbSessionFactory.class,
                                  TestEventServiceConfiguration.class})
 @Transactional
 //@SpringBootTest

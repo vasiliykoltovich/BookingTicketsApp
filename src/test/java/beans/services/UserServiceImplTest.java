@@ -2,7 +2,6 @@ package beans.services;
 
 import beans.configuration.AppConfiguration;
 import beans.configuration.TestUserServiceConfiguration;
-import beans.configuration.db.DataSourceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.UserDAOMock;
 import beans.models.User;
@@ -33,7 +32,7 @@ import static org.junit.Assert.assertTrue;
  * Time: 8:02 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class, DataSourceConfiguration.class, DbSessionFactory.class, TestUserServiceConfiguration.class})
+@ContextConfiguration(classes = {AppConfiguration.class,  DbSessionFactory.class, TestUserServiceConfiguration.class})
 @Transactional
 @SpringBootTest
 public class UserServiceImplTest {

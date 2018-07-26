@@ -2,7 +2,6 @@ package beans.services;
 
 import beans.configuration.AppConfiguration;
 import beans.configuration.TestBookingServiceConfiguration;
-import beans.configuration.db.DataSourceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.BookingDAOBookingMock;
 import beans.daos.mocks.DBAuditoriumDAOMock;
@@ -18,10 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -45,7 +40,7 @@ import static org.junit.Assert.assertTrue;
  * Time: 8:28 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class, DataSourceConfiguration.class, DbSessionFactory.class,
+@ContextConfiguration(classes = {AppConfiguration.class,  DbSessionFactory.class,
                                  TestBookingServiceConfiguration.class})
 @Transactional
 //@SpringBootTest
