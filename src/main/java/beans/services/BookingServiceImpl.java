@@ -31,8 +31,8 @@ public class BookingServiceImpl implements BookingService {
     private final UserService userService;
     private final BookingDAO        bookingDAO;
     private final DiscountService   discountService;
-//    @Autowired
-//    private  UserAccountService userAccountService;
+    @Autowired
+    private  UserAccountService userAccountService;
     final         int               minSeatNumber;
     final         double            vipSeatPriceMultiplier;
     final         double            highRatedPriceMultiplier;
@@ -164,13 +164,27 @@ public class BookingServiceImpl implements BookingService {
         }
 
         List<Ticket> bookedTickets = bookingDAO.getTickets(ticket.getEvent());
+        UserAccount userAccount = userAccountService.getByUser(user);
+//        double ticketsPrice=bookedTickets.stream().map(t -> t.getPrice()).mapToDouble(Number::doubleValue).sum();
+        double ticketsPrice=ticket.getPrice();
+
         boolean seatsAreAlreadyBooked = bookedTickets.stream().filter(bookedTicket -> ticket.getSeatsList().stream().filter(
                 bookedTicket.getSeatsList() :: contains).findAny().isPresent()).findAny().isPresent();
 
-        if (!seatsAreAlreadyBooked)
-            newticket=bookingDAO.create(user, ticket);
-        else
+        if (!seatsAreAlreadyBooked) {
+            if (userAccountService.checkAccountBalance(user) >= ticketsPrice) {
+                if(userAccountService.withDrawMoney(ticketsPrice, userAccount)) {
+                    newticket = bookingDAO.create(user, ticket);
+                } else{
+                    throw new IllegalStateException("Unable to book ticket: [" + newticket + "]. Something wrong with your money");
+                }
+            } else {
+                throw new IllegalStateException("Unable to book ticket: [" + newticket + "]. Not enough money.");
+
+            }
+        } else {
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
+        }
 
         return newticket;
     }

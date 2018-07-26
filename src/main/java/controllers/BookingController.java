@@ -57,20 +57,9 @@ public class BookingController extends GenericController {
         double eventPrice = bookingService.getTicketPrice(event.getName(), event.getAuditorium().getName(), event.getDateTime(), seatList, user);
         Ticket booked = bookingService.bookAndReturnTicket(user, new Ticket(event, LocalDateTime.now(), seatList, user, eventPrice));
         ModelAndView view = new ModelAndView("tickets");
-        if (booked != null) {
-            UserAccount userAccount = userAccountService.getByUser(user);
-            if (userAccountService.checkAccountBalance(user) >= booked.getPrice()) {
-                if (userAccountService.withDrawMoney(booked.getPrice(), userAccount)) {
-                    List<Ticket> tickets = new ArrayList<>();
-                    tickets.add(booked);
-                    view.addObject("tickets", tickets);
-
-                } else {
-                    throw new IllegalStateException("Unable to book ticket: [" + booked + "]. Not enough money.");
-                }
-            }
-        }
-
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(booked);
+        view.addObject("tickets", tickets);
         return view;
     }
 

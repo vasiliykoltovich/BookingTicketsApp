@@ -7,6 +7,7 @@
 </head>
 <body>
 <#include "header.ftl">
+<div>${message}</div>
 <h2 class="users-list">Users:</h2>
 <table>
     <tr>

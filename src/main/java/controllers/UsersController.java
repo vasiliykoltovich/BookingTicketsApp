@@ -1,6 +1,7 @@
 package controllers;
 
 import beans.models.User;
+import beans.models.UserAccount;
 import beans.services.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,12 +34,15 @@ public class UsersController extends GenericController {
     @Autowired
     private UploadService uploadService;
 
+    private String message="";
+
     @GetMapping("/getUserByName/{name}")
     @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView getUserByName(@PathVariable("name") String name) {
         List<User> users = userService.getUsersByName(name);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
+        view.addObject("message", message);
         return view;
 
     }
@@ -51,6 +55,7 @@ public class UsersController extends GenericController {
         users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
+        view.addObject("message", message);
         return view;
 
     }
@@ -63,6 +68,7 @@ public class UsersController extends GenericController {
         users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
+        view.addObject("message", message);
         return view;
     }
 
@@ -77,6 +83,7 @@ public class UsersController extends GenericController {
         users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
+        view.addObject("message", message);
         return view;
     }
 
@@ -90,8 +97,31 @@ public class UsersController extends GenericController {
         users.add(user);
         ModelAndView view = new ModelAndView("users");
         view.addObject("users", users);
+        view.addObject("message", message);
         return view;
     }
+
+    @PostMapping(path = "/fillInMoney",params = {"email","summ"})
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    public ModelAndView fillInMoney(@RequestParam String email,@RequestParam double summ) {
+
+        User user = userService.getUserByEmail(email);
+        UserAccount account=userAccountService.getByUser(user);
+        if(userAccountService.fillInAccount(user,summ)){
+            message="Money transaction complete";
+        } else{
+            message="Cant fill your account ";
+        }
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        ModelAndView view = new ModelAndView("users");
+        view.addObject("users", users);
+        view.addObject("message", message);
+        return view;
+    }
+
+
+
 
     @DeleteMapping("/deleteUser")
     @ResponseStatus(HttpStatus.OK)
@@ -134,6 +164,7 @@ public class UsersController extends GenericController {
         }
 
         view.addObject("users", newUsers);
+        view.addObject("message", message);
         return view;
 
     }

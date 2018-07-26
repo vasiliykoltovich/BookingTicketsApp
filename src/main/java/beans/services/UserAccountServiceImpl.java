@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-//@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor = Exception.class)
 public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
@@ -18,6 +18,19 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
     private UserAccountDao userAccountDao;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class,propagation=Propagation.REQUIRED)
+    public boolean fillInAccount(User user, double summ) {
+        UserAccount account=userAccountRepository.findByUser_email(user.getEmail());
+        if(account!=null && summ>=0){
+            double balance=account.getPrepaidMoney();
+            account.setPrepaidMoney(summ+balance);
+            UserAccount newOne=saveToDb(account);
+            return true;
+        }else
+            return false;
+    }
 
     @Override
     public UserAccount getByUser(User user) {

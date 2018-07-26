@@ -65,7 +65,9 @@ POST
 http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=Meeting%20of%20Strangers&auditorium=Red%20hall&date=2018-03-08T00:00&seats=54
 http://localhost:8100/pdf/bookTicket?email=vasil.koltovich@gmail.com&event=The%20revenant&auditorium=Blue%20hall&date=2018-01-04T00:00&seats=56
 
+POST
 
+http://localhost:8100/fillInMoney?email=vasil.koltovich@gmail.com&summ=500
 
 
 
