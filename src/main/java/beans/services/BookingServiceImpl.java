@@ -154,7 +154,7 @@ public class BookingServiceImpl implements BookingService {
         }
 
         List<Ticket> bookedTickets = bookingDAO.getTickets(ticket.getEvent());
-        UserAccount userAccount = userAccountService.getByUser(user);
+        UserAccount account=user.getUserAccount();
 //        double ticketsPrice=bookedTickets.stream().map(t -> t.getPrice()).mapToDouble(Number::doubleValue).sum();
         double ticketsPrice=ticket.getPrice();
 
@@ -163,7 +163,7 @@ public class BookingServiceImpl implements BookingService {
 
         if (!seatsAreAlreadyBooked) {
             if (userAccountService.checkAccountBalance(user) >= ticketsPrice) {
-                if(userAccountService.withDrawMoney(ticketsPrice, userAccount)) {
+                if(userAccountService.withDrawMoney(ticketsPrice, account)) {
                     newticket = bookingDAO.create(user, ticket);
                 } else{
                     throw new IllegalStateException("Unable to book ticket: [" + newticket + "]. Something wrong with your money");

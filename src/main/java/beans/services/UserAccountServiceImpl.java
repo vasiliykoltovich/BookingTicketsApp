@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserAccountServiceImpl implements UserAccountService {
@@ -18,6 +20,14 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
     private UserAccountDao userAccountDao;
+
+    @Override
+    @Transactional
+    public UserAccount createAccount(User user, double initSumm) {
+        UserAccount newAccount=new UserAccount(-1,initSumm,user);
+
+        return userAccountDao.create(newAccount);
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class,propagation=Propagation.REQUIRED)

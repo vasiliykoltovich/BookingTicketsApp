@@ -4,6 +4,7 @@ import beans.models.User;
 import beans.models.UserAccount;
 
 public interface UserAccountService {
+    UserAccount createAccount(User user,double initSumm);
     boolean fillInAccount(User user,double summ);
     UserAccount getByUser(User user);
     double checkAccountBalance(UserAccount account);

@@ -72,13 +72,15 @@ public class UsersController extends GenericController {
         return view;
     }
 
-    @PostMapping(path = "/createUser",params = {"email","name","date","password"})
+    @PostMapping(path = "/createUser",params = {"email","name","date","balance","password"})
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView createUser(@RequestParam String email, @RequestParam String name,
                                            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                   @RequestParam double balance,
                                    @RequestParam("password")  String password) {
         User user = userService.register(new User(email, name, date,password));
+        UserAccount account =userAccountService.createAccount(user,balance);
         List<User> users=new ArrayList<>();
         users.add(user);
         ModelAndView view = new ModelAndView("users");
@@ -87,12 +89,14 @@ public class UsersController extends GenericController {
         return view;
     }
 
-    @PostMapping(path = "/createUser",params = {"email","name","date","password","role"})
+    @PostMapping(path = "/createUser",params = {"email","name","date","balance","password","role"})
     @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public ModelAndView createUserWithAdditionalRoles(@RequestParam String email, @RequestParam String name,
                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                      @RequestParam double balance,
                                                       @RequestParam("password") String password,@RequestParam("role") String role) {
         User user = userService.register(new User(email, name, date,password,role));
+        UserAccount account =userAccountService.createAccount(user,balance);
         List<User> users = new ArrayList<>();
         users.add(user);
         ModelAndView view = new ModelAndView("users");
