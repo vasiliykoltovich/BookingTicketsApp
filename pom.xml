@@ -48,6 +48,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
@@ -143,6 +148,44 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>schemagen</id>
+                        <goals>
+                            <goal>schemagen</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <sources>
+                        <source>src/main/java/beans/models/User.java</source>
+                        <source>src/main/java/beans/models/Event.java</source>
+                    </sources>
+                    <transformSchemas>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service</uri>
+                            <toPrefix>events</toPrefix>
+                            <toFile>event.xsd</toFile>
+                        </transformSchema>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service</uri>
+                            <toPrefix>users</toPrefix>
+                            <toFile>user.xsd</toFile>
+                        </transformSchema>
+                    </transformSchemas>
+                    <includes>
+                        <include>beans/*</include>
+                    </includes>
+                    <verbose>true</verbose>
+
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

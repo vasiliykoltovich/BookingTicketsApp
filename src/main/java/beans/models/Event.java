@@ -1,5 +1,15 @@
 package beans.models;
 
+import util.DateTimeAdapter;
+import util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 
 /**
@@ -8,14 +18,24 @@ import java.time.LocalDateTime;
  * Date: 2/1/2016
  * Time: 7:42 PM
  */
+@XmlType(name = "Event",namespace = "http://www.booking.org/event")
+@XmlRootElement(name = "event")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Event {
-
+    @XmlAttribute(name = "id")
     private long          id;
+    @XmlElement(name = "name")
     private String name;
+    @XmlElement(name = "rate")
     private Rate rate;
+    @XmlElement(name = "basePrice")
     private double        basePrice;
+    @XmlElement(name = "dateTime")
+    @XmlJavaTypeAdapter(value = DateTimeAdapter.class)
     private LocalDateTime dateTime;
+    @XmlElement(name = "auditorium")
     private Auditorium auditorium;
+    @XmlElement(name = "ticketPrice")
     private double ticketPrice;
 
     public Event() {
