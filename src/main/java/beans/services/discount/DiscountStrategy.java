@@ -1,6 +1,6 @@
 package beans.services.discount;
 
-import beans.models.User;
+import beans.models.soap.User;
 
 /**
  * Created with IntelliJ IDEA.

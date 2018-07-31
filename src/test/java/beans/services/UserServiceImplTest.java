@@ -4,7 +4,7 @@ import beans.configuration.AppConfiguration;
 import beans.configuration.TestUserServiceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.UserDAOMock;
-import beans.models.User;
+import beans.models.soap.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -3,12 +3,11 @@ package beans.daos.db;
 import beans.daos.AbstractDAO;
 import beans.daos.BookingDAO;
 import beans.models.Booking;
-import beans.models.Event;
+import beans.models.soap.Event;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

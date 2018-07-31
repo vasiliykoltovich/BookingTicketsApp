@@ -12,7 +12,7 @@ import beans.models.Auditorium;
 import beans.models.Event;
 import beans.models.Rate;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 import beans.services.AuditoriumService;
 import beans.services.AuditoriumServiceImpl;
 import beans.services.BookingService;
@@ -26,7 +26,6 @@ import beans.services.UserServiceImpl;
 import beans.services.discount.BirthdayStrategy;
 import beans.services.discount.DiscountStrategy;
 import beans.services.discount.TicketsStrategy;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

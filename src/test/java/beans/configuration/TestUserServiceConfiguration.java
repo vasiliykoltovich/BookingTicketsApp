@@ -1,7 +1,7 @@
 package beans.configuration;
 
 import beans.daos.mocks.UserDAOMock;
-import beans.models.User;
+import beans.models.soap.User;
 import beans.services.UserService;
 import beans.services.UserServiceImpl;
 import org.springframework.context.annotation.Bean;

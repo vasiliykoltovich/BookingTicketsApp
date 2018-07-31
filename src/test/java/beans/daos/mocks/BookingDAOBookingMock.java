@@ -2,7 +2,7 @@ package beans.daos.mocks;
 
 import beans.daos.db.BookingDAOImpl;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 
 import java.util.Map;
 import java.util.Set;

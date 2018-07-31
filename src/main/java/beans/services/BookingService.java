@@ -1,7 +1,7 @@
 package beans.services;
 
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 
 import java.time.LocalDateTime;
 import java.util.List;

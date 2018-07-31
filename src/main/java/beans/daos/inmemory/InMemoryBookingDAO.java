@@ -1,9 +1,9 @@
 package beans.daos.inmemory;
 
 import beans.daos.BookingDAO;
-import beans.models.Event;
+import beans.models.soap.Event;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

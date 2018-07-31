@@ -1,8 +1,8 @@
 package controllers;
 
-import beans.models.Event;
+import beans.models.soap.Event;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import util.PdfView;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;

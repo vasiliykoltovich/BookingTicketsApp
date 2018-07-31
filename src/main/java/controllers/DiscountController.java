@@ -1,7 +1,7 @@
 package controllers;
 
-import beans.models.Event;
-import beans.models.User;
+import beans.models.soap.Event;
+import beans.models.soap.User;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.annotation.security.PermitAll;
 import java.time.LocalDateTime;
 
 @Controller

@@ -2,7 +2,7 @@ package beans.configuration;
 
 import beans.daos.EventDAO;
 import beans.daos.mocks.EventDAOMock;
-import beans.models.Event;
+import beans.models.soap.Event;
 import beans.models.Rate;
 import beans.services.EventService;
 import beans.services.EventServiceImpl;

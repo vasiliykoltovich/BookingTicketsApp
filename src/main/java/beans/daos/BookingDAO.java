@@ -1,8 +1,8 @@
 package beans.daos;
 
-import beans.models.Event;
+import beans.models.soap.Event;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 
 import java.util.List;
 import java.util.Objects;

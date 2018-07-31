@@ -1,5 +1,7 @@
 package beans.models;
 
+import beans.models.soap.User;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Dmytro_Babichev

@@ -1,7 +1,7 @@
 package beans.daos.inmemory;
 
 import beans.daos.UserDAO;
-import beans.models.User;
+import beans.models.soap.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;

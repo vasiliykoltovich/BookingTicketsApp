@@ -1,7 +1,11 @@
 package beans.models;
 
+import beans.models.soap.Event;
+import beans.models.soap.User;
 import util.CsvUtil;
+import util.DateTimeAdapter;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,7 +18,7 @@ import java.util.List;
 public class Ticket {
 
     private long          id;
-    private Event         event;
+    private Event event;
     private LocalDateTime dateTime;
     private String seats;
     private User          user;
@@ -55,7 +59,7 @@ public class Ticket {
     public void setEvent(Event event) {
         this.event = event;
     }
-
+    @XmlJavaTypeAdapter(value = DateTimeAdapter.class)
     public LocalDateTime getDateTime() {
         return dateTime;
     }

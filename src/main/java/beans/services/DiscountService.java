@@ -1,7 +1,7 @@
 package beans.services;
 
-import beans.models.Event;
-import beans.models.User;
+import beans.models.soap.Event;
+import beans.models.soap.User;
 
 /**
  * Created with IntelliJ IDEA.

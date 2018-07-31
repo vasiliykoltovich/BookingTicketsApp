@@ -19,7 +19,7 @@
                 </generator>
             </id>
         <property name="prepaidMoney" type="double" column="PREPAID_MONEY"/>
-        <one-to-one name="user" class="User" cascade="save-update" constrained="true" foreign-key="user_id"/>
+        <one-to-one name="user" class="beans.models.soap.User" cascade="save-update" constrained="true" foreign-key="user_id"/>
 
     </class>
 

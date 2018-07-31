@@ -1,6 +1,6 @@
 package beans.aspects;
 
-import beans.models.User;
+import beans.models.soap.User;
 import beans.services.discount.BirthdayStrategy;
 import beans.services.discount.TicketsStrategy;
 import org.aspectj.lang.JoinPoint;
@@ -30,7 +30,7 @@ public class DiscountAspect {
         discountPerUserCounter.put(TicketsStrategy.class.getSimpleName(), new HashMap<>());
     }
 
-    @Pointcut("(execution(* beans.services.discount.DiscountStrategy.calculateDiscount(beans.models.User)) && args(user))")
+    @Pointcut("(execution(* beans.services.discount.DiscountStrategy.calculateDiscount(beans.models.soap.User)) && args(user))")
     private void calculateDiscount(User user) {
     }
 

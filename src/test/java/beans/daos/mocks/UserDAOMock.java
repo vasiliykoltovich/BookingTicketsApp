@@ -1,7 +1,7 @@
 package beans.daos.mocks;
 
 import beans.daos.db.UserDAOImpl;
-import beans.models.User;
+import beans.models.soap.User;
 
 import java.util.List;
 

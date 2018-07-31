@@ -1,7 +1,7 @@
 package beans.services;
 
-import beans.models.Event;
-import beans.models.User;
+import beans.models.soap.Event;
+import beans.models.soap.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

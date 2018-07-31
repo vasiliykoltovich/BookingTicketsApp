@@ -2,7 +2,7 @@ package beans.services;
 
 import beans.daos.UserDAO;
 import beans.models.Ticket;
-import beans.models.User;
+import beans.models.soap.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

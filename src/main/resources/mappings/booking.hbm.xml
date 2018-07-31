@@ -16,7 +16,7 @@
         <id name="id" column="ID">
             <generator class="identity"/>
         </id>
-        <many-to-one name="user" class="beans.models.User" column="USER" fetch="join" lazy="false"/>
+        <many-to-one name="user" class="beans.models.soap.User" column="USER" fetch="join" lazy="false"/>
         <many-to-one name="ticket" class="beans.models.Ticket" column="TICKET" fetch="join" lazy="false"/>
     </class>
 

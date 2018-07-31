@@ -1,7 +1,7 @@
 package beans.daos.mocks;
 
 import beans.daos.db.EventDAOImpl;
-import beans.models.Event;
+import beans.models.soap.Event;
 
 import java.util.List;
 

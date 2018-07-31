@@ -1,6 +1,6 @@
 package beans.services.discount;
 
-import beans.models.User;
+import beans.models.soap.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

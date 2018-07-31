@@ -1,4 +1,4 @@
-package beans.models;
+package beans.models.soap;
 
 import util.LocalDateAdapter;
 
@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
-@XmlType(name = "User",namespace = "http://www.booking.org/user")
+@XmlType(name = "User",namespace = "http://www.booking.org/service/user")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {

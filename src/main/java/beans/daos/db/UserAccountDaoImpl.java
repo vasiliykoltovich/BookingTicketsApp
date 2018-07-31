@@ -1,7 +1,6 @@
 package beans.daos.db;
 
 import beans.daos.AbstractDAO;
-import beans.daos.BookingDAO;
 import beans.daos.UserAccountDao;
 import beans.models.Booking;
 import beans.models.Ticket;

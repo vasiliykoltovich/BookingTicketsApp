@@ -2,10 +2,9 @@ package beans.daos.db;
 
 import beans.daos.AbstractDAO;
 import beans.daos.UserDAO;
-import beans.models.User;
+import beans.models.soap.User;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
