@@ -3,7 +3,8 @@ package endpoints;
 import beans.models.soap.User;
 import beans.models.soap.GetUserRequest;
 import beans.models.soap.GetUserResponse;
-import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
@@ -16,9 +17,9 @@ public class UsersEndpoint extends GenericEndpoint{
 
     private static final String NAMESPACE_URI = "http://www.booking.org/service";
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUserRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequest")
     @ResponsePayload
-    public GetUserResponse getUsers(@RequestPayload GetUserRequest request) {
+    public GetUserResponse getUser(@RequestPayload GetUserRequest request) {
         GetUserResponse response = new GetUserResponse();
         try {
             if (request.getId() != 0) {

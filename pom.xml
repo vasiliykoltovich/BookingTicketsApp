@@ -140,16 +140,6 @@
             <artifactId>wsdl4j</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.ws.commons.schema/XmlSchema -->
-        <!-- https://mvnrepository.com/artifact/org.apache.ws.xmlschema/xmlschema-core -->
-        <dependency>
-            <groupId>org.apache.ws.xmlschema</groupId>
-            <artifactId>xmlschema-core</artifactId>
-            <version>2.2.3</version>
-        </dependency>
-
-
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

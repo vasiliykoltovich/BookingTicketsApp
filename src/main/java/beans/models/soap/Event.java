@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * Time: 7:42 PM
  */
 @XmlType(name = "Event",namespace = "http://www.booking.org/service")
-@XmlRootElement(name = "Event")
+@XmlRootElement(name = "Event" ,namespace = "http://www.booking.org/service" )
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Event {
     @XmlAttribute(name = "id")

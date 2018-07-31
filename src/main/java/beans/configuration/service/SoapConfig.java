@@ -28,8 +28,9 @@ public class SoapConfig {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setPortTypeName("BookingServicePort");
         definition.setTargetNamespace("http://www.booking.org/service");
-        definition.setLocationUri("/ws/");
+        definition.setLocationUri("/ws");
         definition.setSchema(bookingServiceSchema());
+
         return definition;
     }
 

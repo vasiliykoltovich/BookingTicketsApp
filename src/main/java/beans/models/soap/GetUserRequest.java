@@ -2,9 +2,9 @@ package beans.models.soap;
 
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement
+@XmlRootElement(name = "getUserRequest",namespace = "http://www.booking.org/service")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GetUserRequest",namespace = "http://www.booking.org/service")
+@XmlType(name = "getUserRequest",namespace = "http://www.booking.org/service")
 public class GetUserRequest {
     @XmlElement(name="id")
     private long      id;

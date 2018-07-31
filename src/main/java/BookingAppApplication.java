@@ -25,7 +25,7 @@ import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class},
         scanBasePackages = {"beans","controllers"})
-@ComponentScan(basePackages = {"beans","controllers"})
+@ComponentScan(basePackages = {"beans","controllers","endpoints"})
 @EnableJpaRepositories(basePackageClasses = {UserRepository.class,UserAccountRepository.class})
 public class BookingAppApplication {
 

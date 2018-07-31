@@ -1,7 +1,7 @@
-
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.booking.org/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.booking.org/service" targetNamespace="http://www.booking.org/service">
     <wsdl:types>
-        <xs:schema xmlns="http://www.booking.org/service" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.booking.org/service">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.booking.org/service" version="1.0">
             <xs:complexType name="Event">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
@@ -12,28 +12,22 @@
                 </xs:sequence>
                 <xs:attribute name="id" type="xs:long" use="required"/>
             </xs:complexType>
-            <xs:complexType name="Event">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="rate" type="rate"/>
-                    <xs:element name="basePrice" type="xs:double"/>
-                    <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
-                    <xs:element name="ticketPrice" type="xs:double"/>
-                </xs:sequence>
-                <xs:attribute name="id" type="xs:long" use="required"/>
-            </xs:complexType>
-            <xs:complexType name="GetUserRequest">
-                <xs:sequence>
-                    <xs:element name="id" type="xs:long"/>
-                    <xs:element minOccurs="0" name="email" type="xs:string"/>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="GetUserResponse">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="users" type="xs:User"/>
-                </xs:sequence>
-            </xs:complexType>
+            <xs:element name="GetUserRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                        <xs:element minOccurs="0" name="email" type="xs:string"/>
+                        <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="users" type="tns:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:complexType name="User">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="email" type="xs:string"/>
@@ -53,13 +47,33 @@
             </xs:simpleType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:portType name="BookingServicePort"> </wsdl:portType>
+    <wsdl:message name="GetUserRequest">
+        <wsdl:part element="tns:GetUserRequest" name="GetUserRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetUserResponse">
+        <wsdl:part element="tns:GetUserResponse" name="GetUserResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="BookingServicePort">
+        <wsdl:operation name="GetUser">
+            <wsdl:input message="tns:GetUserRequest" name="GetUserRequest"> </wsdl:input>
+            <wsdl:output message="tns:GetUserResponse" name="GetUserResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
     <wsdl:binding name="BookingServicePortSoap11" type="tns:BookingServicePort">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetUser">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetUserRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="BookingServicePortService">
         <wsdl:port binding="tns:BookingServicePortSoap11" name="BookingServicePortSoap11">
-            <soap:address location="http://localhost:8100/ws/*"/>
+            <soap:address location="http://localhost:8100/ws"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
