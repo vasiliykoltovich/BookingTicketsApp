@@ -5,7 +5,7 @@ import java.util.List;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getUserResponse",namespace = "http://www.booking.org/service")
+@XmlType(name = "GetUserResponse",namespace = "http://www.booking.org/service")
 public class GetUserResponse {
     @XmlElement(required = true)
     private List<User> users;

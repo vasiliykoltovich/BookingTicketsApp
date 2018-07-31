@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 @XmlType(name = "User",namespace = "http://www.booking.org/service")
-@XmlRootElement(name = "user")
+@XmlRootElement(name = "User")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlSeeAlso(UserAccount.class)
 public class User {

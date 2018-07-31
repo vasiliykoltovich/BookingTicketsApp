@@ -14,8 +14,9 @@ import java.util.List;
 @Endpoint
 public class UsersEndpoint extends GenericEndpoint{
 
-    private static final String NAMESPACE_URI = "http://www.booking.org/soap-service";
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequest")
+    private static final String NAMESPACE_URI = "http://www.booking.org/service";
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetUserRequest")
     @ResponsePayload
     public GetUserResponse getUsers(@RequestPayload GetUserRequest request) {
         GetUserResponse response = new GetUserResponse();

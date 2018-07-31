@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getUserRequest",namespace = "http://www.booking.org/service")
+@XmlType(name = "GetUserRequest",namespace = "http://www.booking.org/service")
 public class GetUserRequest {
     @XmlElement(name="id")
     private long      id;
