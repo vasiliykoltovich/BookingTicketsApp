@@ -51,4 +51,8 @@ No file has been uploaded.
 
 Upload your assignment
 
- SELECT A FILE
+
+
+
+Service url:
+http://localhost:8100/ws/booking-service.wsdl
