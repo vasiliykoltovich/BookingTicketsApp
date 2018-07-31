@@ -1,7 +1,7 @@
 package controllers;
 
-import beans.models.User;
-import beans.models.UserAccount;
+import beans.models.soap.User;
+import beans.models.soap.UserAccount;
 import beans.services.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

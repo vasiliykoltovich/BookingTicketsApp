@@ -1,7 +1,7 @@
 package beans.daos.inmemory;
 
 import beans.daos.AuditoriumDAO;
-import beans.models.Auditorium;
+import beans.models.soap.Auditorium;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;

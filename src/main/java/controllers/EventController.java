@@ -1,7 +1,7 @@
 package controllers;
 
-import beans.models.Auditorium;
-import beans.models.Event;
+import beans.models.soap.Auditorium;
+import beans.models.soap.Event;
 import beans.models.Rate;
 import beans.services.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;

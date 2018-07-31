@@ -1,12 +1,9 @@
 package controllers;
 
-import beans.models.Auditorium;
-import beans.services.AuditoriumService;
-import beans.services.BookingService;
-import beans.services.EventService;
-import beans.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import beans.models.soap.Auditorium;
+import beans.models.soap.Event;
+import beans.models.Rate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,5 +1,10 @@
-package beans.models;
+package beans.models.soap;
 
+import beans.models.soap.User;
+
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(name = "account",namespace = "http://www.booking.org/service/account")
 public class UserAccount {
     private long id;
     private Double prepaidMoney;

@@ -2,10 +2,9 @@ package beans.daos.db;
 
 import beans.daos.AbstractDAO;
 import beans.daos.AuditoriumDAO;
-import beans.models.Auditorium;
+import beans.models.soap.Auditorium;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

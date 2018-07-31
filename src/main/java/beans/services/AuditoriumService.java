@@ -1,6 +1,6 @@
 package beans.services;
 
-import beans.models.Auditorium;
+import beans.models.soap.Auditorium;
 
 import java.util.List;
 

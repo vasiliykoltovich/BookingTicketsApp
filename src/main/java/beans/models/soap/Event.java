@@ -3,12 +3,7 @@ package beans.models.soap;
 import beans.models.Rate;
 import util.DateTimeAdapter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 
@@ -21,6 +16,7 @@ import java.time.LocalDateTime;
 @XmlType(name = "Event",namespace = "http://www.booking.org/service/event")
 @XmlRootElement(name = "event")
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlSeeAlso(Auditorium.class)
 public class Event {
     @XmlAttribute(name = "id")
     private long          id;
@@ -33,7 +29,9 @@ public class Event {
     @XmlElement(name = "dateTime")
     @XmlJavaTypeAdapter(value = DateTimeAdapter.class)
     private LocalDateTime dateTime;
-    @XmlElement(name = "auditorium")
+    @XmlElement(name = "auditorium",namespace="http://www.booking.org/service/auditorium")
+//    @XmlTransient
+    @XmlSchemaType(name = "auditorium")
     private Auditorium auditorium;
     @XmlElement(name = "ticketPrice")
     private double ticketPrice;

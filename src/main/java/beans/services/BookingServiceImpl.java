@@ -2,6 +2,10 @@ package beans.services;
 
 import beans.daos.BookingDAO;
 import beans.models.*;
+import beans.models.soap.Auditorium;
+import beans.models.soap.Event;
+import beans.models.soap.User;
+import beans.models.soap.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

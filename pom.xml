@@ -178,27 +178,69 @@
 
                 <configuration>
                     <sources>
-                        <source>src/main/java/beans/models/User.java</source>
-                        <source>src/main/java/beans/models/Event.java</source>
-                    </sources>
+                        <source>src/main/java/beans/models/soap/</source>
+                        <source>src/main/java/beans/models/</source>
+                  </sources>
                     <transformSchemas>
                         <transformSchema>
-                            <uri>http://www.booking.org/service</uri>
-                            <toPrefix>events</toPrefix>
+                            <uri>http://www.booking.org/service/event</uri>
+                            <toPrefix>event</toPrefix>
                             <toFile>event.xsd</toFile>
                         </transformSchema>
                         <transformSchema>
-                            <uri>http://www.booking.org/service</uri>
-                            <toPrefix>users</toPrefix>
+                            <uri>http://www.booking.org/service/user</uri>
+                            <toPrefix>user</toPrefix>
                             <toFile>user.xsd</toFile>
+                        </transformSchema>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service/getUserRequest</uri>
+                            <toPrefix>getUserRequest</toPrefix>
+                            <toFile>getUserRequest.xsd</toFile>
+                        </transformSchema>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service/getUserResponse</uri>
+                            <toPrefix>getUserResponse</toPrefix>
+                            <toFile>getUserResponse.xsd</toFile>
+                        </transformSchema>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service/account</uri>
+                            <toPrefix>acc</toPrefix>
+                            <toFile>account.xsd</toFile>
+                        </transformSchema>
+                        <transformSchema>
+                            <uri>http://www.booking.org/service/auditorium</uri>
+                            <toPrefix>aud</toPrefix>
+                            <toFile>auditorium.xsd</toFile>
                         </transformSchema>
                     </transformSchemas>
                     <includes>
                         <include>beans/*</include>
                     </includes>
+                    <outputDirectory>src/main/resources/soap/</outputDirectory>
                     <verbose>true</verbose>
 
                 </configuration>
+
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>xjc</id>-->
+                        <!--<goals>-->
+                            <!--<goal>xjc</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash; The package of your generated sources &ndash;&gt;-->
+                    <!--<sources>-->
+                        <!--&lt;!&ndash;<source>src/main/some/other/xsds</source>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/foo/gnat.xsd</source>&ndash;&gt;-->
+                        <!--<source>src/main/resources/soap/event.xsd</source>-->
+                        <!--<source>src/main/resources/soap/getUserRequest.xsd</source>-->
+                        <!--<source>src/main/resources/soap/getUserResponse.xsd</source>-->
+                        <!--<source>src/main/resources/soap/user.xsd</source>-->
+                        <!--<source>src/main/resources/soap/schema5.xsd</source>-->
+                    <!--</sources>-->
+                <!--</configuration>-->
             </plugin>
 
         </plugins>
