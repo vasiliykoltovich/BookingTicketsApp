@@ -2,7 +2,7 @@ package beans.daos.db;
 
 import beans.daos.AbstractDAO;
 import beans.daos.UserAccountDao;
-import beans.models.soap.UserAccount;
+import beans.models.UserAccount;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -163,85 +163,60 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.2</version>
-                <executions>
-                    <execution>
-                        <id>schemagen</id>
-                        <goals>
-                            <goal>schemagen</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <sources>
-                        <source>src/main/java/beans/models/soap/</source>
-                        <source>src/main/java/beans/models/</source>
-                  </sources>
-                    <transformSchemas>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/event</uri>
-                            <toPrefix>event</toPrefix>
-                            <toFile>event.xsd</toFile>
-                        </transformSchema>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/user</uri>
-                            <toPrefix>user</toPrefix>
-                            <toFile>user.xsd</toFile>
-                        </transformSchema>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/getUserRequest</uri>
-                            <toPrefix>getUserRequest</toPrefix>
-                            <toFile>getUserRequest.xsd</toFile>
-                        </transformSchema>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/getUserResponse</uri>
-                            <toPrefix>getUserResponse</toPrefix>
-                            <toFile>getUserResponse.xsd</toFile>
-                        </transformSchema>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/account</uri>
-                            <toPrefix>acc</toPrefix>
-                            <toFile>account.xsd</toFile>
-                        </transformSchema>
-                        <transformSchema>
-                            <uri>http://www.booking.org/service/auditorium</uri>
-                            <toPrefix>aud</toPrefix>
-                            <toFile>auditorium.xsd</toFile>
-                        </transformSchema>
-                    </transformSchemas>
-                    <includes>
-                        <include>beans/*</include>
-                    </includes>
-                    <outputDirectory>src/main/resources/soap/</outputDirectory>
-                    <verbose>true</verbose>
-
-                </configuration>
-
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>jaxb2-maven-plugin</artifactId>-->
+                <!--<version>2.2</version>-->
                 <!--<executions>-->
                     <!--<execution>-->
-                        <!--<id>xjc</id>-->
+                        <!--<id>schemagen</id>-->
                         <!--<goals>-->
-                            <!--<goal>xjc</goal>-->
+                            <!--<goal>schemagen</goal>-->
                         <!--</goals>-->
                     <!--</execution>-->
                 <!--</executions>-->
+
                 <!--<configuration>-->
-                    <!--&lt;!&ndash; The package of your generated sources &ndash;&gt;-->
                     <!--<sources>-->
-                        <!--&lt;!&ndash;<source>src/main/some/other/xsds</source>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<source>src/main/foo/gnat.xsd</source>&ndash;&gt;-->
-                        <!--<source>src/main/resources/soap/event.xsd</source>-->
-                        <!--<source>src/main/resources/soap/getUserRequest.xsd</source>-->
-                        <!--<source>src/main/resources/soap/getUserResponse.xsd</source>-->
-                        <!--<source>src/main/resources/soap/user.xsd</source>-->
-                        <!--<source>src/main/resources/soap/schema5.xsd</source>-->
-                    <!--</sources>-->
+                        <!--<source>src/main/java/beans/models/soap/</source>-->
+                  <!--</sources>-->
+                    <!--<transformSchemas>-->
+                        <!--<transformSchema>-->
+                            <!--<uri>http://www.booking.org/service/</uri>-->
+                            <!--&lt;!&ndash;<toPrefix>event</toPrefix>&ndash;&gt;-->
+                            <!--<toFile>schemas.xsd</toFile>-->
+                        <!--</transformSchema>-->
+
+                    <!--</transformSchemas>-->
+                    <!--<includes>-->
+                        <!--<include>beans/*</include>-->
+                    <!--</includes>-->
+                    <!--<outputDirectory>src/main/resources/soap/</outputDirectory>-->
+                    <!--<verbose>true</verbose>-->
+
                 <!--</configuration>-->
-            </plugin>
+
+                <!--&lt;!&ndash;<executions>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<id>xjc</id>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<goals>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<goal>xjc</goal>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</goals>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</execution>&ndash;&gt;-->
+                <!--&lt;!&ndash;</executions>&ndash;&gt;-->
+                <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash; The package of your generated sources &ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<sources>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<source>src/main/some/other/xsds</source>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<source>src/main/foo/gnat.xsd</source>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/resources/soap/event.xsd</source>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/resources/soap/getUserRequest.xsd</source>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/resources/soap/getUserResponse.xsd</source>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/resources/soap/user.xsd</source>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<source>src/main/resources/soap/schema5.xsd</source>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</sources>&ndash;&gt;-->
+                <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+            <!--</plugin>-->
 
         </plugins>
     </build>

@@ -3,7 +3,7 @@ package beans.services;
 import beans.daos.UserAccountDao;
 import beans.daos.UserAccountRepository;
 import beans.models.soap.User;
-import beans.models.soap.UserAccount;
+import beans.models.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

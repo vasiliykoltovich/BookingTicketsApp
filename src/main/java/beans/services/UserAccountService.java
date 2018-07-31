@@ -1,7 +1,7 @@
 package beans.services;
 
 import beans.models.soap.User;
-import beans.models.soap.UserAccount;
+import beans.models.UserAccount;
 
 public interface UserAccountService {
     UserAccount createAccount(User user,double initSumm);

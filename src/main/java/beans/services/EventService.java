@@ -1,6 +1,6 @@
 package beans.services;
 
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package beans.daos;
 
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 
 import java.util.List;
 

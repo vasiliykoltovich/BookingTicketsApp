@@ -1,6 +1,6 @@
 package beans.configuration;
 
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

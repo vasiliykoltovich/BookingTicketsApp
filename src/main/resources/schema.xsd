@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.booking.org/service"  version="1.0">
+
+    <xs:complexType name="Event">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="rate" type="rate"/>
+            <xs:element name="basePrice" type="xs:double"/>
+            <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+            <xs:element name="ticketPrice" type="xs:double"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Event">
+
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="rate" type="rate"/>
+            <xs:element name="basePrice" type="xs:double"/>
+            <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+            <xs:element name="ticketPrice" type="xs:double"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="getUserRequest">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="getUserResponse">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="users" type="xs:User"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="User">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="birthday" type="xs:string"/>
+            <xs:element minOccurs="0" name="password" type="xs:string"/>
+            <xs:element minOccurs="0" name="roles" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+
+    <xs:simpleType name="rate">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LOW"/>
+            <xs:enumeration value="MID"/>
+            <xs:enumeration value="HIGH"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+
+</xs:schema>

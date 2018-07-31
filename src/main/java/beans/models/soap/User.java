@@ -1,5 +1,6 @@
 package beans.models.soap;
 
+import beans.models.UserAccount;
 import util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -7,7 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
-@XmlType(name = "User",namespace = "http://www.booking.org/service/user")
+@XmlType(name = "User",namespace = "http://www.booking.org/service")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 //@XmlSeeAlso(UserAccount.class)
@@ -25,9 +26,8 @@ public class User {
     private String password;
     @XmlElement(name = "roles")
     private String roles = "REGISTERED_USER";
-    @XmlElement(name = "userAccount" ,namespace="http://www.booking.org/service/account")
-//    @XmlTransient
-    @XmlSchemaType(name = "userAccount")
+//    @XmlElement(name = "userAccount" ,namespace="http://www.booking.org/service/account")
+    @XmlTransient
     private UserAccount userAccount;
 
     public User() {

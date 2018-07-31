@@ -21,7 +21,7 @@
         <property name="birthday" type="java.time.LocalDate" column="EVENT_DATE"/>
         <property name="password" column="PASSWORD" type="string"/>
         <property name="roles" column="ROLES" type="string"/>
-        <one-to-one name="userAccount" cascade="all" class="beans.models.soap.UserAccount" />
+        <one-to-one name="userAccount" cascade="all" class="beans.models.UserAccount" />
 
     </class>
 

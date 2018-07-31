@@ -1,7 +1,7 @@
 package beans.services;
 
 import beans.daos.AuditoriumDAO;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

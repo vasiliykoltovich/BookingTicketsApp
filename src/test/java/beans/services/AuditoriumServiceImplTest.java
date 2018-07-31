@@ -3,7 +3,7 @@ package beans.services;
 import beans.configuration.AppConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.DBAuditoriumDAOMock;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

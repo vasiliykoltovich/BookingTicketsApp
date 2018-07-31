@@ -1,6 +1,6 @@
 package controllers;
 
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 import beans.models.Rate;
 import beans.services.UploadService;

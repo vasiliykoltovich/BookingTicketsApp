@@ -2,7 +2,7 @@ package beans.daos.db;
 
 import beans.daos.AbstractDAO;
 import beans.daos.EventDAO;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 import org.hibernate.Query;
 import org.hibernate.criterion.LogicalExpression;

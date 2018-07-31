@@ -8,7 +8,7 @@ import beans.daos.mocks.BookingDAOBookingMock;
 import beans.daos.mocks.DBAuditoriumDAOMock;
 import beans.daos.mocks.EventDAOMock;
 import beans.daos.mocks.UserDAOMock;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 import beans.models.Rate;
 import beans.models.Ticket;

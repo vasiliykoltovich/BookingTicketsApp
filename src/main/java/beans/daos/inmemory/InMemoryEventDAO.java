@@ -1,7 +1,7 @@
 package beans.daos.inmemory;
 
 import beans.daos.EventDAO;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,7 @@
-package beans.models.soap;
+package beans.models;
 
 import util.CsvUtil;
 
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -11,7 +10,8 @@ import java.util.List;
  * Date: 2/1/2016
  * Time: 7:55 PM
  */
-@XmlType(name = "auditorium",namespace = "http://www.booking.org/service/auditorium")
+//@XmlType(name = "auditorium",namespace = "http://www.booking.org/service/auditorium")
+//@XmlRootElement(name = "auditorium",namespace = "http://www.booking.org/service/auditorium")
 public class Auditorium {
 
     private long   id;

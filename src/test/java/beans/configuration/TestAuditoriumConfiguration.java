@@ -2,7 +2,7 @@ package beans.configuration;
 
 import beans.daos.AuditoriumDAO;
 import beans.daos.mocks.DBAuditoriumDAOMock;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.services.AuditoriumService;
 import beans.services.AuditoriumServiceImpl;
 import org.springframework.context.annotation.Bean;

@@ -4,7 +4,7 @@ import beans.configuration.AppConfiguration;
 import beans.configuration.TestEventServiceConfiguration;
 import beans.configuration.db.DbSessionFactory;
 import beans.daos.mocks.EventDAOMock;
-import beans.models.soap.Auditorium;
+import beans.models.Auditorium;
 import beans.models.soap.Event;
 import beans.models.Rate;
 import org.junit.After;
