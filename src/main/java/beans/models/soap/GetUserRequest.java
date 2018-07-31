@@ -7,18 +7,17 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "getUserRequest",namespace = "http://www.booking.org/service")
 public class GetUserRequest {
     @XmlElement(name="id")
-    private long      id;
+    private Long     id;
     @XmlElement(name = "email")
     private String email;
     @XmlElement(name = "name")
     private String name;
 
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

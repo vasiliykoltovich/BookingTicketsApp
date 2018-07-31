@@ -4,16 +4,7 @@
            xmlns:tns="http://www.booking.org/service"
            version="1.0">
 
-    <xs:complexType name="Event">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="name" type="xs:string"/>
-            <xs:element minOccurs="0" name="rate" type="rate"/>
-            <xs:element name="basePrice" type="xs:double"/>
-            <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
-            <xs:element name="ticketPrice" type="xs:double"/>
-        </xs:sequence>
-        <xs:attribute name="id" type="xs:long" use="required"/>
-    </xs:complexType>
+
 
     <xs:element name="getUserRequest">
         <xs:complexType>
@@ -27,11 +18,94 @@
 
     <xs:element name="getUserResponse">
         <xs:complexType>
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="users" type="tns:User"/>
-        </xs:sequence>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="users" type="tns:User"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+
+
+    <xs:element name="createUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="user" type="tns:User"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="user" type="tns:User"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fillMoneyRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="email" type="xs:string"/>
+                <xs:element name="summ" type="xs:double"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="deleteUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="email" type="xs:string"/>
+                <xs:element name="id" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="getEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="name" type="xs:string"/>
+                <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="events" type="tns:Event"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+
+    <xs:element name="deleteEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="event" type="tns:Event"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
 
     <xs:complexType name="User">
         <xs:sequence>
@@ -40,6 +114,17 @@
             <xs:element minOccurs="0" name="birthday" type="xs:string"/>
             <xs:element minOccurs="0" name="password" type="xs:string"/>
             <xs:element minOccurs="0" name="roles" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Event">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element minOccurs="0" name="rate" type="rate"/>
+            <xs:element name="basePrice" type="xs:double"/>
+            <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+            <xs:element name="ticketPrice" type="xs:double"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" use="required"/>
     </xs:complexType>
