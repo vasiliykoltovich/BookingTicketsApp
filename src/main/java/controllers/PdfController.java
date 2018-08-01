@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Controller
 public class PdfController extends GenericController {
 
-    @PreAuthorize("hasAuthority('BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     @GetMapping(value = "/getTicketForEvent", produces = MediaType.APPLICATION_PDF_VALUE,params = {"event","auditorium","date"},headers = {"accept"})
     public ModelAndView getTicketForEvent(@Nullable @RequestHeader("accept") String accept, @RequestParam("event") String eventName,
                                           @RequestParam("auditorium") String auditorium,
@@ -46,7 +46,7 @@ public class PdfController extends GenericController {
     }
 
     @GetMapping(value = "/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE,params = {"email"},headers = {"accept"})
-    @PreAuthorize("hasAuthority('BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     public ModelAndView getBookedTicketsByUser(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email) {
         List<Ticket> tickets = bookingService.getTicketsByUser(email);
         ModelAndView view = null;
@@ -66,7 +66,7 @@ public class PdfController extends GenericController {
 
     @PostMapping(value = "/bookTicket",params = {"email","event","auditorium","date","seats"},headers = {"accept"},produces = MediaType.APPLICATION_PDF_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     public ModelAndView bookTicket(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email,
                                    @RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
