@@ -109,8 +109,20 @@
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
-            <version>4.2.2</version>
+            <version>2.1.7</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.lowagie</groupId>-->
+            <!--<artifactId>itext</artifactId>-->
+            <!--<version>4.2.2</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
