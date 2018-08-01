@@ -1,6 +1,7 @@
 package beans.models;
 
 import beans.models.soap.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -10,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 public class UserAccount {
     private long id;
     private Double prepaidMoney;
+    @JsonIgnoreProperties("userAccount")
     private User user;
 
     public UserAccount() {

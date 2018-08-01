@@ -1,6 +1,7 @@
 package beans.models.soap;
 
 import beans.models.UserAccount;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -28,6 +29,7 @@ public class User {
     private String roles = "REGISTERED_USER";
 //    @XmlElement(name = "userAccount" ,namespace="http://www.booking.org/service/account")
     @XmlTransient
+    @JsonIgnoreProperties("user")
     private UserAccount userAccount;
 
     public User() {
