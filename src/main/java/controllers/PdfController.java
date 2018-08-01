@@ -43,12 +43,12 @@ public class PdfController extends GenericController {
     @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     @GetMapping(value = "/getTicketForEvent",
             produces = MediaType.APPLICATION_PDF_VALUE, params = {"event", "auditorium", "date"},
-            headers = {"accept", "content-type"})
+            headers = {"accept"})
     public ModelAndView getTicketForEvent(@Nullable @RequestHeader("accept") String accept,
-                                          @RequestHeader("content-type") String contentType,
                                           @RequestParam("event") String eventName,
                                           @RequestParam("auditorium") String auditorium,
-                                          @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
+                                          @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date
+    ) {
 
         List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditorium, date);
         ModelAndView view = null;
@@ -87,8 +87,10 @@ public class PdfController extends GenericController {
     @PostMapping(value = "/bookTicket", params = {"email", "event", "auditorium", "date", "seats"}, headers = {"accept"}, produces = MediaType.APPLICATION_PDF_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
-    public ModelAndView bookTicket(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email,
-                                   @RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
+    public ModelAndView bookTicket(@Nullable @RequestHeader("accept") String accept,
+                                   @RequestParam("email") String email,
+                                   @RequestParam("event") String eventName,
+                                   @RequestParam("auditorium") String auditorium,
                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                                    @RequestParam("seats") String seats) {
 
@@ -113,12 +115,13 @@ public class PdfController extends GenericController {
     }
 
 
-    @PostMapping(value = "/bookTicket", params = {"email", "event", "auditorium", "date", "seats"},
+    @PostMapping(value = "/bookTicket", params = {"email", "event", "auditorium", "date", "seats","response"},
             headers = {"accept"}, produces = MediaType.APPLICATION_PDF_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
-    public void bookTicket(@Nullable @RequestHeader("accept") String accept, @RequestParam("email") String email,
-                           @RequestParam("event") String eventName, @RequestParam("auditorium") String auditorium,
+    public void bookTicket(@Nullable @RequestHeader("accept") String accept,
+                           @RequestParam("email") String email,
+                           @RequestParam("event") String eventName,
+                           @RequestParam("auditorium") String auditorium,
                            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
                            @RequestParam("seats") String seats,
                            HttpServletResponse response) throws DocumentException, IOException {

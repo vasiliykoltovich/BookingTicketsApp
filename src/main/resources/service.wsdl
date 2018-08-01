@@ -1,30 +1,85 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.booking.org/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.booking.org/service" targetNamespace="http://www.booking.org/service">
     <wsdl:types>
         <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.booking.org/service" version="1.0">
-            <xs:complexType name="Event">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="name" type="xs:string"/>
-                    <xs:element minOccurs="0" name="rate" type="rate"/>
-                    <xs:element name="basePrice" type="xs:double"/>
-                    <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
-                    <xs:element name="ticketPrice" type="xs:double"/>
-                </xs:sequence>
-                <xs:attribute name="id" type="xs:long" use="required"/>
-            </xs:complexType>
-            <xs:element name="GetUserRequest">
+            <xs:element name="getUserRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="id" type="xs:long"/>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
                         <xs:element minOccurs="0" name="email" type="xs:string"/>
                         <xs:element minOccurs="0" name="name" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="GetUserResponse">
+            <xs:element name="getUserResponse">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="unbounded" name="users" type="tns:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createUserRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="user" type="tns:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="user" type="tns:User"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="fillMoneyRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="email" type="xs:string"/>
+                        <xs:element name="summ" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="email" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEventRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="name" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEventResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="events" type="tns:Event"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteEventRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="event" type="tns:Event"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteEventResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="id" type="xs:long"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -38,6 +93,16 @@ This XML file does not appear to have any style information associated with it. 
                 </xs:sequence>
                 <xs:attribute name="id" type="xs:long" use="required"/>
             </xs:complexType>
+            <xs:complexType name="Event">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rate" type="rate"/>
+                    <xs:element name="basePrice" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+                    <xs:element name="ticketPrice" type="xs:double"/>
+                </xs:sequence>
+                <xs:attribute name="id" type="xs:long" use="required"/>
+            </xs:complexType>
             <xs:simpleType name="rate">
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="LOW"/>
@@ -47,26 +112,114 @@ This XML file does not appear to have any style information associated with it. 
             </xs:simpleType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="GetUserRequest">
-        <wsdl:part element="tns:GetUserRequest" name="GetUserRequest"> </wsdl:part>
+    <wsdl:message name="getUserResponse">
+        <wsdl:part element="tns:getUserResponse" name="getUserResponse"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="GetUserResponse">
-        <wsdl:part element="tns:GetUserResponse" name="GetUserResponse"> </wsdl:part>
+    <wsdl:message name="deleteUserRequest">
+        <wsdl:part element="tns:deleteUserRequest" name="deleteUserRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="fillMoneyRequest">
+        <wsdl:part element="tns:fillMoneyRequest" name="fillMoneyRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUserResponse">
+        <wsdl:part element="tns:createUserResponse" name="createUserResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEventResponse">
+        <wsdl:part element="tns:getEventResponse" name="getEventResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUserRequest">
+        <wsdl:part element="tns:createUserRequest" name="createUserRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getUserRequest">
+        <wsdl:part element="tns:getUserRequest" name="getUserRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteEventRequest">
+        <wsdl:part element="tns:deleteEventRequest" name="deleteEventRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteUserResponse">
+        <wsdl:part element="tns:deleteUserResponse" name="deleteUserResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEventRequest">
+        <wsdl:part element="tns:getEventRequest" name="getEventRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteEventResponse">
+        <wsdl:part element="tns:deleteEventResponse" name="deleteEventResponse"></wsdl:part>
     </wsdl:message>
     <wsdl:portType name="BookingServicePort">
-        <wsdl:operation name="GetUser">
-            <wsdl:input message="tns:GetUserRequest" name="GetUserRequest"> </wsdl:input>
-            <wsdl:output message="tns:GetUserResponse" name="GetUserResponse"> </wsdl:output>
+        <wsdl:operation name="getUser">
+            <wsdl:input message="tns:getUserRequest" name="getUserRequest"></wsdl:input>
+            <wsdl:output message="tns:getUserResponse" name="getUserResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <wsdl:input message="tns:deleteUserRequest" name="deleteUserRequest"></wsdl:input>
+            <wsdl:output message="tns:deleteUserResponse" name="deleteUserResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="fillMoney">
+            <wsdl:input message="tns:fillMoneyRequest" name="fillMoneyRequest"></wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <wsdl:input message="tns:createUserRequest" name="createUserRequest"></wsdl:input>
+            <wsdl:output message="tns:createUserResponse" name="createUserResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEvent">
+            <wsdl:input message="tns:getEventRequest" name="getEventRequest"></wsdl:input>
+            <wsdl:output message="tns:getEventResponse" name="getEventResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteEvent">
+            <wsdl:input message="tns:deleteEventRequest" name="deleteEventRequest"></wsdl:input>
+            <wsdl:output message="tns:deleteEventResponse" name="deleteEventResponse"></wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="BookingServicePortSoap11" type="tns:BookingServicePort">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="GetUser">
+        <wsdl:operation name="getUser">
             <soap:operation soapAction=""/>
-            <wsdl:input name="GetUserRequest">
+            <wsdl:input name="getUserRequest">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="GetUserResponse">
+            <wsdl:output name="getUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUser">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="deleteUserRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="fillMoney">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="fillMoneyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createUserRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEvent">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getEventRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEventResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteEvent">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="deleteEventRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteEventResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
