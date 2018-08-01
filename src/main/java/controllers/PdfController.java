@@ -113,7 +113,7 @@ public class PdfController extends GenericController {
     }
 
 
-    @PostMapping(value = "/bookTicket", params = {"email", "event", "auditorium", "date", "seats"},
+    @PostMapping(value = "/bookTicket", params = {"email", "event", "auditorium", "date", "seats","response"},
             headers = {"accept"}, produces = MediaType.APPLICATION_PDF_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
