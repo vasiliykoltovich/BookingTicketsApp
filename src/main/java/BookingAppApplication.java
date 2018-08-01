@@ -1,4 +1,5 @@
 import beans.configuration.views.JsonViewResolver;
+import beans.configuration.views.PdfViewResolver;
 import beans.daos.UserAccountRepository;
 import beans.services.security.UserRepository;
 import org.springframework.boot.SpringApplication;
@@ -57,17 +58,17 @@ public class BookingAppApplication {
 
         List< ViewResolver > resolvers = new ArrayList< ViewResolver >();
 
-        resolvers.add(jsonViewResolver());
+//        resolvers.add(jsonViewResolver());
 //        resolvers.add(pdfViewResolver());
 
         resolver.setViewResolvers(resolvers);
         return resolver;
     }
 
-//    @Bean
-//    public ViewResolver pdfViewResolver() {
-//        return new PdfViewResolver();
-//    }
+    @Bean
+    public ViewResolver pdfViewResolver() {
+        return new PdfViewResolver();
+    }
 
 
 

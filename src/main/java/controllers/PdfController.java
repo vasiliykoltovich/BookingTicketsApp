@@ -11,6 +11,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +58,20 @@ public class PdfController extends GenericController {
         return view;
 
     }
+
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @GetMapping(value = "/getTicketForEvent",produces = MediaType.APPLICATION_JSON_VALUE,params = {"event","auditorium","date"})
+    public ResponseEntity<Object> getTicketForEvent(
+                                           @RequestParam("event") String eventName,
+                                                      @RequestParam("auditorium") String auditorium,
+                                                      @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date
+                                                   ) {
+        List<Ticket> tickets = bookingService.getTicketsForEvent(eventName, auditorium, date);
+        return new ResponseEntity<>(tickets, HttpStatus.OK);
+    }
+
+
+
 
     @GetMapping(value = "/getBookedTicketsByUser", produces = MediaType.APPLICATION_PDF_VALUE,params = {"email"},headers = {"accept"})
     @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
