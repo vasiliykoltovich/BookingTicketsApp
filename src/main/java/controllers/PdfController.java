@@ -105,8 +105,8 @@ public class PdfController extends GenericController {
 
     }
 
-    @PostMapping(value = "/bookTicket",headers = {"accept"},produces = MediaType.APPLICATION_PDF_VALUE)
-    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
+    @PostMapping(value = "/bookTicket",headers = {"accept"})
+    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
     public void bookTicket(@Nullable @RequestHeader("accept") String accept,
                                    @RequestBody TicketHolder holder,HttpServletResponse response) throws DocumentException, IOException {
 
