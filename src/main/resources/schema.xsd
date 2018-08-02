@@ -139,6 +139,7 @@
             <xs:element minOccurs="0" name="birthday" type="xs:string"/>
             <xs:element minOccurs="0" name="password" type="xs:string"/>
             <xs:element minOccurs="0" name="roles" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="userAccount" type="tns:UserAccount"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" use="required"/>
     </xs:complexType>
@@ -150,6 +151,25 @@
             <xs:element name="basePrice" type="xs:double"/>
             <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
             <xs:element name="ticketPrice" type="xs:double"/>
+            <xs:element maxOccurs="unbounded" name="auditorium" type="tns:Auditorium"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="Auditorium">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+            <xs:element name="seatsNumber" type="xs:int"/>
+            <xs:element minOccurs="0" name="vipSeats" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="UserAccount">
+        <xs:sequence>
+            <xs:element name="prepaidMoney" type="xs:double"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" use="required"/>
     </xs:complexType>

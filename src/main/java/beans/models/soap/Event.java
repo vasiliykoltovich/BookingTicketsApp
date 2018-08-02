@@ -29,8 +29,8 @@ public class Event {
     @XmlElement(name = "dateTime")
     @XmlJavaTypeAdapter(value = DateTimeAdapter.class)
     private LocalDateTime dateTime;
-//    @XmlElement(name = "auditorium",namespace="http://www.booking.org/service/auditorium")
-    @XmlTransient
+    @XmlElement(name = "auditorium")
+//    @XmlTransient
     private Auditorium auditorium;
     @XmlElement(name = "ticketPrice")
     private double ticketPrice;

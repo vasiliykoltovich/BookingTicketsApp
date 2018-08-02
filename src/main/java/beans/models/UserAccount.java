@@ -4,6 +4,7 @@ import beans.models.soap.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 //@XmlType(name = "account",namespace = "http://www.booking.org/service/account")
@@ -12,6 +13,7 @@ public class UserAccount {
     private long id;
     private Double prepaidMoney;
     @JsonIgnoreProperties("userAccount")
+    @XmlTransient
     private User user;
 
     public UserAccount() {

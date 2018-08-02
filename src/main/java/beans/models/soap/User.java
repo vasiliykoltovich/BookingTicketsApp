@@ -27,8 +27,8 @@ public class User {
     private String password;
     @XmlElement(name = "roles")
     private String roles = "REGISTERED_USER";
-//    @XmlElement(name = "userAccount" ,namespace="http://www.booking.org/service/account")
-    @XmlTransient
+    @XmlElement(name = "userAccount")
+//    @XmlTransient
     @JsonIgnoreProperties("user")
     private UserAccount userAccount;
 
