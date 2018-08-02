@@ -1,19 +1,8 @@
 package endpoints;
 
+import beans.models.Auditorium;
 import beans.models.UserAccount;
-import beans.models.soap.CreateUserRequest;
-import beans.models.soap.CreateUserResponse;
-import beans.models.soap.DeleteEventRequest;
-import beans.models.soap.DeleteEventResponse;
-import beans.models.soap.DeleteUserRequest;
-import beans.models.soap.DeleteUserResponse;
-import beans.models.soap.Event;
-import beans.models.soap.FillMoneyRequest;
-import beans.models.soap.GetEventRequest;
-import beans.models.soap.GetEventResponse;
-import beans.models.soap.User;
-import beans.models.soap.GetUserRequest;
-import beans.models.soap.GetUserResponse;
+import beans.models.soap.*;
 
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -128,4 +117,24 @@ public class WSEndpoint extends GenericEndpoint {
         return response;
     }
 
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createEventRequest")
+    @ResponsePayload
+    public CreateEventResponse createEvent(@RequestPayload CreateEventRequest request) {
+        CreateEventResponse response = new CreateEventResponse();
+
+            Auditorium auditorium = auditoriumService.getByName(request.getAuditorium());
+            Event event = eventService.create(new Event(
+                    request.getName(),
+                    request.getRate(),
+                    request.getBasePrice(),
+                    request.getTicketPrice(),
+                    request.getDateTime(),
+                    auditorium
+                    ));
+            response.setEvent(event);
+            return response;
+
+
+    }
 }

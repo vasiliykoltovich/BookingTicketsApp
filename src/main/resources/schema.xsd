@@ -88,6 +88,31 @@
     </xs:element>
 
 
+    <xs:element name="createEventRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="name" type="xs:string"/>
+                <xs:element minOccurs="0" name="rate" type="rate"/>
+                <xs:element name="basePrice" type="xs:double"/>
+                <xs:element name="ticketPrice" type="xs:double"/>
+                <xs:element minOccurs="0" name="dateTime" type="xs:string"/>
+                <xs:element minOccurs="0" name="auditorium" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createEventResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="events" type="tns:Event"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+
+
+
 
     <xs:element name="deleteEventRequest">
         <xs:complexType>
