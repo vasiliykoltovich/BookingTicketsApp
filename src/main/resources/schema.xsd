@@ -87,7 +87,6 @@
         </xs:complexType>
     </xs:element>
 
-
     <xs:element name="createEventRequest">
         <xs:complexType>
             <xs:sequence>
@@ -109,11 +108,6 @@
         </xs:complexType>
     </xs:element>
 
-
-
-
-
-
     <xs:element name="deleteEventRequest">
         <xs:complexType>
             <xs:sequence>
@@ -129,8 +123,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-
 
     <xs:complexType name="User">
         <xs:sequence>
