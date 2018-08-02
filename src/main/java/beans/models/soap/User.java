@@ -27,8 +27,8 @@ public class User {
     private String password;
     @XmlElement(name = "roles")
     private String roles = "REGISTERED_USER";
-    @XmlElement(name = "userAccount")
-//    @XmlTransient
+//    @XmlElement(name = "userAccount")
+    @XmlTransient
     @JsonIgnoreProperties("user")
     private UserAccount userAccount;
 

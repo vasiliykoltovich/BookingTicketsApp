@@ -131,7 +131,6 @@
             <xs:element minOccurs="0" name="birthday" type="xs:string"/>
             <xs:element minOccurs="0" name="password" type="xs:string"/>
             <xs:element minOccurs="0" name="roles" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" name="userAccount" type="tns:UserAccount"/>
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" use="required"/>
     </xs:complexType>
