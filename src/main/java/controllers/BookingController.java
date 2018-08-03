@@ -28,7 +28,7 @@ public class BookingController extends GenericController {
 
     @GetMapping("/getTicketPrice")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     public ResponseEntity<Double> getTicketPrice(@RequestParam("eventName") String eventName,
                                                  @RequestParam("auditorium") String auditorium,
                                                  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
@@ -43,7 +43,7 @@ public class BookingController extends GenericController {
 
 
     @PostMapping(value = "/bookTicket",params = {"email","event","auditorium","date","seats"})
-    @PreAuthorize("hasAnyAuthority('REGISTERED_USER','BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     public ModelAndView bookTicket(@RequestParam("email") String email, @RequestParam("event") String eventName,
                                              @RequestParam("auditorium") String auditorium,
                                              @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
@@ -64,7 +64,7 @@ public class BookingController extends GenericController {
     }
 
     @GetMapping(value = "/getTicketForEvent", params = {"event","auditorium", "date"})
-    @PreAuthorize("hasAuthority('BOOKING_MANAGER')")
+    @PreAuthorize("hasAuthority('BOOKING_MANAGER') and hasAuthority('REGISTERED_USER') ")
     public ModelAndView getTicketForEvent(@RequestParam("event") String eventName,
                                                           @RequestParam("auditorium") String auditorium,
                                                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
